@@ -7,14 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ServiciosImpl\" />
-    <Folder Include="Servicios\" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="8.1.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Carfaith.Dominio.Modelo\Carfaith.Dominio.Modelo.csproj" />
     <ProjectReference Include="..\Carfaith.Dominio.Servicios\Carfaith.Dominio.Servicios.csproj" />
     <ProjectReference Include="..\Carfaith.Infraestructura.AccesoDatos\Carfaith.Infraestructura.AccesoDatos.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>
