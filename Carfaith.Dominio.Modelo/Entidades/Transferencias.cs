@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Carfaith.Dominio.Modelo.Entidades;
+
+public partial class Transferencias
+{
+    public int IdTransferencia { get; set; }
+
+    public DateOnly? Fecha { get; set; }
+
+    public int? UbicacionOrigenId { get; set; }
+
+    public int? UbicacionDestinoId { get; set; }
+
+    public virtual ICollection<DetalleTransferencia> DetalleTransferencia { get; set; } = new List<DetalleTransferencia>();
+
+    public virtual Ubicaciones? UbicacionDestino { get; set; }
+
+    public virtual Ubicaciones? UbicacionOrigen { get; set; }
+}

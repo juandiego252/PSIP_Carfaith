@@ -1,0 +1,80 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Presentacion", "1.Presentacion", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Aplicacion", "2.Aplicacion", "{DB2EEB1B-B3D1-42C3-8F59-9E341BEE794D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Dominio", "3.Dominio", "{894AB3C3-2C90-4F96-B4F8-8784768D530E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Infraestructura", "4.Infraestructura", "{AC6E5BB1-4443-4E31-B91F-F05E0CC1FCC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Pruebas", "5.Pruebas", "{C525EF65-D61C-4B06-91A3-F702E35753DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carfaith.Aplicacion", "Carfaith.Aplicacion\Carfaith.Aplicacion.csproj", "{330F2506-5A05-40A0-A3F5-50CF7462B3E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carfaith.Aplicacion.DTO", "Carfaith.Aplicacion.DTO\Carfaith.Aplicacion.DTO.csproj", "{D8823701-1A31-48D4-8895-CB92B92063C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carfaith_API", "Carfaith_API\Carfaith_API.csproj", "{F8B1A294-6CD4-4311-B14C-38D26059635D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carfaith.Dominio.Modelo", "Carfaith.Dominio.Modelo\Carfaith.Dominio.Modelo.csproj", "{C1133138-B312-4A71-8460-4B7BD29526CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carfaith.Dominio.Servicios", "Carfaith.Dominio.Servicios\Carfaith.Dominio.Servicios.csproj", "{595AB53C-375D-4752-843F-B28649981BE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carfaith.Infraestructura.AccesoDatos", "Carfaith.Infraestructura.AccesoDatos\Carfaith.Infraestructura.AccesoDatos.csproj", "{0E4DC4E8-8221-4131-9128-040127C0ECAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebasCarfaithSQL", "PruebasCarfaithSQL\PruebasCarfaithSQL.csproj", "{1ED26E2D-81F6-4139-B708-7931A1F613D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{330F2506-5A05-40A0-A3F5-50CF7462B3E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{330F2506-5A05-40A0-A3F5-50CF7462B3E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{330F2506-5A05-40A0-A3F5-50CF7462B3E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{330F2506-5A05-40A0-A3F5-50CF7462B3E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8823701-1A31-48D4-8895-CB92B92063C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8823701-1A31-48D4-8895-CB92B92063C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8823701-1A31-48D4-8895-CB92B92063C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8823701-1A31-48D4-8895-CB92B92063C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8B1A294-6CD4-4311-B14C-38D26059635D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8B1A294-6CD4-4311-B14C-38D26059635D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8B1A294-6CD4-4311-B14C-38D26059635D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8B1A294-6CD4-4311-B14C-38D26059635D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1133138-B312-4A71-8460-4B7BD29526CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1133138-B312-4A71-8460-4B7BD29526CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1133138-B312-4A71-8460-4B7BD29526CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1133138-B312-4A71-8460-4B7BD29526CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{595AB53C-375D-4752-843F-B28649981BE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{595AB53C-375D-4752-843F-B28649981BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{595AB53C-375D-4752-843F-B28649981BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{595AB53C-375D-4752-843F-B28649981BE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E4DC4E8-8221-4131-9128-040127C0ECAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E4DC4E8-8221-4131-9128-040127C0ECAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E4DC4E8-8221-4131-9128-040127C0ECAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E4DC4E8-8221-4131-9128-040127C0ECAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ED26E2D-81F6-4139-B708-7931A1F613D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ED26E2D-81F6-4139-B708-7931A1F613D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ED26E2D-81F6-4139-B708-7931A1F613D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ED26E2D-81F6-4139-B708-7931A1F613D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{330F2506-5A05-40A0-A3F5-50CF7462B3E6} = {DB2EEB1B-B3D1-42C3-8F59-9E341BEE794D}
+		{D8823701-1A31-48D4-8895-CB92B92063C3} = {DB2EEB1B-B3D1-42C3-8F59-9E341BEE794D}
+		{F8B1A294-6CD4-4311-B14C-38D26059635D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{C1133138-B312-4A71-8460-4B7BD29526CA} = {894AB3C3-2C90-4F96-B4F8-8784768D530E}
+		{595AB53C-375D-4752-843F-B28649981BE7} = {894AB3C3-2C90-4F96-B4F8-8784768D530E}
+		{0E4DC4E8-8221-4131-9128-040127C0ECAA} = {AC6E5BB1-4443-4E31-B91F-F05E0CC1FCC3}
+		{1ED26E2D-81F6-4139-B708-7931A1F613D0} = {C525EF65-D61C-4B06-91A3-F702E35753DD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {08E76585-ABB7-41CF-8B3D-F3D94527BDD5}
+	EndGlobalSection
+EndGlobal

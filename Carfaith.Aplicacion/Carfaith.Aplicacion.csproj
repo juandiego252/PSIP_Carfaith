@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="ServiciosImpl\" />
+    <Folder Include="Servicios\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Carfaith.Dominio.Modelo\Carfaith.Dominio.Modelo.csproj" />
+    <ProjectReference Include="..\Carfaith.Dominio.Servicios\Carfaith.Dominio.Servicios.csproj" />
+    <ProjectReference Include="..\Carfaith.Infraestructura.AccesoDatos\Carfaith.Infraestructura.AccesoDatos.csproj" />
+  </ItemGroup>
+
+</Project>
