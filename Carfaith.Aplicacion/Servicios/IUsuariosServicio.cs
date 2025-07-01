@@ -22,7 +22,6 @@ namespace Carfaith.Aplicacion.Servicios
         Task<IEnumerable<Usuarios>> GetAllUsuariosAsync();
 
         [OperationContract]
-        Task DeleteUsuariosAsync(int id);
-
+        Task DeleteUsuariosByIdAsync(int id);
     }
 }

@@ -26,19 +26,29 @@ namespace Carfaith.Aplicacion.ServiciosImpl
                 throw new ArgumentNullException(nameof(usuario), "El usuario no puede ser nulo.");
             }
 
+            if (string.IsNullOrEmpty(usuario.NombreCompleto))
+            {
+                throw new ArgumentException("El nombre completo no puede ser nulo o vacío.", nameof(usuario));
+            }
+            // Verificar que el email sea unico
+            if (!string.IsNullOrEmpty(usuario.Email) && !await _usuariosRepositorio.IsEmailUnique(usuario.Email))
+            {
+                throw new ArgumentException($"El email {usuario.Email} ya se encuentra registrado", nameof(usuario));
+            }
+
+            if (string.IsNullOrEmpty(usuario.Contraseña))
+            {
+                throw new ArgumentException("La contraseña no puede ser nula o vacía.", nameof(usuario));
+            }
+
             usuario.Contraseña = BCrypt.Net.BCrypt.HashPassword(usuario.Contraseña);
 
             await _usuariosRepositorio.AddAsync(usuario);
         }
 
-        public async Task DeleteUsuariosAsync(int id)
+        public async Task DeleteUsuariosByIdAsync(int id)
         {
-            var usuario = await _usuariosRepositorio.GetByIdAsync(id);
-            if (usuario == null)
-            {
-                throw new KeyNotFoundException($"Usuario con ID {id} no encontrado.");
-            }
-            await _usuariosRepositorio.DeleteAsync(usuario.IdUsuario);
+            await _usuariosRepositorio.DeleteAsync(id);
         }
 
         public async Task<IEnumerable<Usuarios>> GetAllUsuariosAsync()
@@ -53,25 +63,32 @@ namespace Carfaith.Aplicacion.ServiciosImpl
 
         public async Task UpdateUsuariosAsync(Usuarios usuario)
         {
-            if (usuario == null)
+            var usuarioExistente = await _usuariosRepositorio.GetByIdAsync(usuario.IdUsuario);
+            if (usuarioExistente == null)
             {
-                throw new ArgumentNullException(nameof(usuario), "El usuario no puede ser nulo.");
+                throw new ArgumentException($"No se encontró un usuario con el ID: {usuario.IdUsuario}");
+            }
+
+            if (!string.IsNullOrEmpty(usuario.NombreCompleto))
+            {
+                usuarioExistente.NombreCompleto = usuario.NombreCompleto;
+            }
+
+            if (!string.IsNullOrEmpty(usuario.Email))
+            {
+                if (usuario.Email != usuarioExistente.Email && !await _usuariosRepositorio.IsEmailUnique(usuario.Email))
+                {
+                    throw new ArgumentException($"El email {usuario.Email} ya se encuentra registrado");
+                }
+                usuarioExistente.Email = usuario.Email;
             }
 
             if (!string.IsNullOrEmpty(usuario.Contraseña))
             {
-                usuario.Contraseña = BCrypt.Net.BCrypt.HashPassword(usuario.Contraseña);
-            }
-            else
-            {
-                var usuarioExistente = await _usuariosRepositorio.GetByIdAsync(usuario.IdUsuario);
-                if (usuarioExistente != null)
-                {
-                    usuario.Contraseña = usuarioExistente.Contraseña; // Mantener la contraseña existente si no se proporciona una nueva
-                }
+                usuarioExistente.Contraseña = BCrypt.Net.BCrypt.HashPassword(usuario.Contraseña);
             }
 
-            await _usuariosRepositorio.UpdateAsync(usuario);
+            await _usuariosRepositorio.UpdateAsync(usuarioExistente);
         }
     }
 }

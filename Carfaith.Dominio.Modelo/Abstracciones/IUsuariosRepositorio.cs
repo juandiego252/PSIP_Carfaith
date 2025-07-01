@@ -9,5 +9,6 @@ namespace Carfaith.Dominio.Modelo.Abstracciones
 {
     public interface IUsuariosRepositorio : IRepositorio<Usuarios>
     {
+        public Task<bool> IsEmailUnique(string email);
     }
 }
