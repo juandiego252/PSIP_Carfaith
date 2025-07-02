@@ -1,0 +1,83 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Carfaith.Aplicacion.Servicios;
+using Carfaith.Dominio.Modelo.Abstracciones;
+using Carfaith.Dominio.Modelo.Entidades;
+using Carfaith.Infraestructura.AccesoDatos.EFCore;
+using Carfaith.Infraestructura.AccesoDatos.Repositorio;
+
+namespace Carfaith.Aplicacion.ServiciosImpl
+{
+    public class ProveedoresServicioImpl : IProveedoresServicio
+    {
+        private IProveedoresRepositorio _proveedoresRepositorio;
+
+        public ProveedoresServicioImpl(CarfaithDbContext context)
+        {
+            _proveedoresRepositorio = new ProveedoresRepositorioImpl(context);
+        }
+
+        // Metodos CRUD
+        public async Task AddProveedoresAsync(Proveedores proveedores)
+        {
+            if (proveedores == null)
+            {
+                throw new ArgumentNullException(nameof(proveedores), "El proveedor no puede ser nulo.");
+            }
+            ValidarTipoProveedor(proveedores.TipoProveedor!);
+
+            await _proveedoresRepositorio.AddAsync(proveedores);
+
+        }
+
+        public async Task DeleteProveedoresByIdAsync(int id)
+        {
+            await _proveedoresRepositorio.DeleteAsync(id);
+        }
+
+        public async Task<IEnumerable<Proveedores>> GetAllProveedoresAsync()
+        {
+            return await _proveedoresRepositorio.GetAllAsync();
+        }
+
+        public async Task<Proveedores> GetByIdProveedoresAsync(int id)
+        {
+            return await _proveedoresRepositorio.GetByIdAsync(id);
+        }
+
+        public async Task UpdateProveedoresAsync(Proveedores proveedores)
+        {
+            await _proveedoresRepositorio.UpdateAsync(proveedores);
+        }
+
+        // Consultas
+        public async Task<IEnumerable<Proveedores>> GetProveedoresPorNombreAsync(string nombre)
+        {
+            return await _proveedoresRepositorio.GetProveedoresPorNombreAsync(nombre);
+        }
+
+        public async Task<IEnumerable<Proveedores>> GetProveedoresPorPais(string paisOrigen)
+        {
+            return await _proveedoresRepositorio.GetProveedoresPorPais(paisOrigen);
+        }
+
+        public async Task<IEnumerable<Proveedores>> GetProveedoresPorTipoProveedor(string tipoProveedor)
+        {
+            return await _proveedoresRepositorio.GetProveedoresPorTipoProveedor(tipoProveedor);
+        }
+
+
+        // Metodos de Validación
+        public void ValidarTipoProveedor(string tipoProveedor)
+        {
+            string[] tiposValidos = { "local", "nacional", "internacional" };
+            if (!tiposValidos.Contains(tipoProveedor.ToLower()))
+            {
+                throw new ArgumentException("Proveedor no valido. Debe ser local, nacional o internacional.");
+            }
+        }
+    }
+}

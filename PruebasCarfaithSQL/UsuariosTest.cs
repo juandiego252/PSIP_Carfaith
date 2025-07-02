@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PruebasCarfaithSQL
 {
-    public class Tests
+    public class UsuariosTest
     {
         private CarfaithDbContext _context;
         private IUsuariosServicio _usuariosServicio;
