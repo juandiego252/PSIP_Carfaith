@@ -12,5 +12,7 @@ namespace Carfaith.Dominio.Modelo.Abstracciones
         public Task<IEnumerable<Proveedores>> GetProveedoresPorNombreAsync(string nombre);
         public Task<IEnumerable<Proveedores>> GetProveedoresPorTipoProveedor(string tipoProveedor);
         public Task<IEnumerable<Proveedores>> GetProveedoresPorPais(string paisOrigen);
+
+        public Task<IEnumerable<Proveedores>> GetProveedoresPorRucAsync(string ruc);
     }
 }

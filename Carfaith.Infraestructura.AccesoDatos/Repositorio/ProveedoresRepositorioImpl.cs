@@ -36,6 +36,14 @@ namespace Carfaith.Infraestructura.AccesoDatos.Repositorio
             return await proveedores.ToListAsync();
         }
 
+        public async Task<IEnumerable<Proveedores>> GetProveedoresPorRucAsync(string ruc)
+        {
+            var proveedores = from p in _context.Proveedores
+                              where p.Ruc == ruc
+                              select p;
+            return await proveedores.ToListAsync();
+        }
+
         public async Task<IEnumerable<Proveedores>> GetProveedoresPorTipoProveedor(string tipoProveedor)
         {
             var proveedores = from p in _context.Proveedores

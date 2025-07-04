@@ -25,12 +25,22 @@ namespace Carfaith.Aplicacion.ServiciosImpl
         {
             if (proveedores == null)
             {
-                throw new ArgumentNullException(nameof(proveedores), "El proveedor no puede ser nulo.");
+                throw new ArgumentNullException("El proveedor no puede ser nulo.");
             }
+
+            if (string.IsNullOrWhiteSpace(proveedores.Ruc))
+            {
+                throw new ArgumentException("El RUC del proveedor no puede ser nulo o vacío.");
+            }
+
+            var existeProveedor = await _proveedoresRepositorio.GetProveedoresPorRucAsync(proveedores.Ruc);
+            if (existeProveedor != null)
+            {
+                throw new ArgumentException("El proveedor ya se encuentra registrado");
+            }
+
             ValidarTipoProveedor(proveedores.TipoProveedor!);
-
             await _proveedoresRepositorio.AddAsync(proveedores);
-
         }
 
         public async Task DeleteProveedoresByIdAsync(int id)
