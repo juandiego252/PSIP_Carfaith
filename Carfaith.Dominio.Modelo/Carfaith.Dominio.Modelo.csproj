@@ -10,4 +10,8 @@
     <Folder Include="ObjetoValor\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Carfaith.Aplicacion.DTO\Carfaith.Aplicacion.DTO.csproj" />
+  </ItemGroup>
+
 </Project>
