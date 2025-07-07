@@ -17,16 +17,17 @@ public class ProductoTest : TestBase
 
 
     [Test]
+    [Category("productos")]
     public async Task CrearProducto()
     {
-        //var producto = new Producto
-        //{
-        //    CodigoProducto = "PROD001",
-        //    Nombre = "Decorador Faros de luz",
-        //    LineaDeProducto = 1 // Asumiendo que la línea de producto con ID 1 ya existe
-        //};
+        var producto = new Producto
+        {
+            CodigoProducto = "PROD010",
+            Nombre = "Filtro de aire",
+            LineaDeProducto = 4 // Asumiendo que la línea de producto con ID 1 ya existe
+        };
 
-        //await _productoServicio.AddProductoAsync(producto);
+        await _productoServicio.AddProductoAsync(producto);
     }
 
 }
