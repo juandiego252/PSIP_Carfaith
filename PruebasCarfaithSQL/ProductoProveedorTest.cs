@@ -38,7 +38,12 @@ public class ProductoProveedorTest : TestBase
         var detalles = await _productoProveedorServicio.GetProductoProveedorDetallesAsync();
         foreach (var item in detalles)
         {
-            Console.WriteLine($"Id: {item.IdProductoProveedor}, Producto: {item.NombreProducto}, Proveedor: {item.NombreProveedor}, Linea: {item.LineaProducto}");
+            Console.WriteLine(
+                $"Id: {item.IdProductoProveedor}, " +
+                $"Producto: {item.NombreProducto}, " +
+                $"Proveedor: {item.NombreProveedor}, " +
+                $"Linea: {item.LineaProducto}, " +
+                $"Código:{item.CodigoProducto}");
 
         }
 
