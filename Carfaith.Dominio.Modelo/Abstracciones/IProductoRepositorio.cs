@@ -9,5 +9,6 @@ namespace Carfaith.Dominio.Modelo.Abstracciones
 {
     public interface IProductoRepositorio : IRepositorio<Producto>
     {
+        public Task<bool> IsCodigoProductoUnique(string codigoProducto);
     }
 }
