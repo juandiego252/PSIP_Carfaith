@@ -71,5 +71,30 @@ namespace Carfaith.Aplicacion.ServiciosImpl
         {
             return await _productoProveedorRepositorio.GetProveedoresConProductosAsync();
         }
+
+        public async Task<IEnumerable<LineaProductoProveedoresDTO>> GetLineasConProveedoresAsync()
+        {
+             return await _productoProveedorRepositorio.GetLineasConProveedoresAsync();
+        }
+
+        public async Task<IEnumerable<ProductoPorLineaProveedorDTO>> GetProductosPorLineaProveedorAsync()
+        {
+            return await _productoProveedorRepositorio.GetProductosPorLineaProveedorAsync();
+        }
+
+        public async Task<IEnumerable<ProveedorProductosPorPaisDTO>> GetProveedorProductosPorPaisAsync()
+        {
+            return await _productoProveedorRepositorio.GetProveedorProductosPorPaisAsync();
+        }
+
+        public async Task<IEnumerable<ProductoProveedorDetalleDTO>> GetProductosProveedoresPorLineaAsync(int idLinea)
+        {
+            return await _productoProveedorRepositorio.GetProductosProveedoresPorLineaAsync(idLinea);
+        }
+
+        public async Task<IEnumerable<ProductoProveedorDetalleDTO>> GetProductosProveedoresPorPaisAsync(string paisOrigen)
+        {
+            return await _productoProveedorRepositorio.GetProductosProveedoresPorPaisAsync(paisOrigen);
+        }
     }
 }

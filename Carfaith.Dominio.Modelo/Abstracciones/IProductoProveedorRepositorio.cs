@@ -15,5 +15,23 @@ namespace Carfaith.Dominio.Modelo.Abstracciones
 
         // Consulta N2
         public Task<IEnumerable<ProveedorProductosDTO>> GetProveedoresConProductosAsync();
+
+        // Consulta N3
+        Task<IEnumerable<LineaProductoProveedoresDTO>> GetLineasConProveedoresAsync();
+
+        // Consulta N4
+        Task<IEnumerable<ProductoPorLineaProveedorDTO>> GetProductosPorLineaProveedorAsync();
+
+
+        // Consulta N5
+        Task<IEnumerable<ProveedorProductosPorPaisDTO>> GetProveedorProductosPorPaisAsync();
+
+
+        // Consulta N6
+        Task<IEnumerable<ProductoProveedorDetalleDTO>> GetProductosProveedoresPorLineaAsync(int idLinea);
+
+
+        // Consulta N7
+        Task<IEnumerable<ProductoProveedorDetalleDTO>> GetProductosProveedoresPorPaisAsync(string paisOrigen);
     }
 }
