@@ -37,9 +37,29 @@ namespace Carfaith.Infraestructura.AccesoDatos.Repositorio
             return await query.ToListAsync();
         }
 
-        public Task<IEnumerable<ProveedorProductosDTO>> GetProveedoresConProductosAsync()
+        public async Task<IEnumerable<ProveedorProductosDTO>> GetProveedoresConProductosAsync()
         {
-            throw new NotImplementedException();
+            var query = from proveedor in _context.Proveedores
+                        select new ProveedorProductosDTO
+                        {
+                            IdProveedor = proveedor.IdProveedor,
+                            NombreProveedor = proveedor.NombreProveedor!,
+                            PaisOrigen = proveedor.PaisOrigen!,
+                            Ruc = proveedor.Ruc!,
+                            TotalProductos = proveedor.ProductoProveedors.Count(),
+                            Productos = (from productosProveedor in proveedor.ProductoProveedors
+                                         join producto in _context.Productos on productosProveedor.IdProducto equals producto.IdProducto
+                                         join lineasProducto in _context.LineasDeProductos on producto.LineaDeProducto equals lineasProducto.IdLinea
+                                         select new ProductoResumenDTO
+                                         {
+                                             IdProducto = producto.IdProducto,
+                                             Nombre = producto.Nombre!,
+                                             CodigoProducto = producto.CodigoProducto!,
+                                             LineaProducto = lineasProducto.Nombre!,
+                                         }).ToList()
+                        };
+
+            return await query.ToListAsync();
         }
     }
 }

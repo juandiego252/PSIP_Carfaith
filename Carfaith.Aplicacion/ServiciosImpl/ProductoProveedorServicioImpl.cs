@@ -66,5 +66,10 @@ namespace Carfaith.Aplicacion.ServiciosImpl
         {
             return await _productoProveedorRepositorio.GetProductoProveedorDetalleAsync();
         }
+
+        public async Task<IEnumerable<ProveedorProductosDTO>> GetProveedoresConProductosAsync()
+        {
+            return await _productoProveedorRepositorio.GetProveedoresConProductosAsync();
+        }
     }
 }

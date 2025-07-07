@@ -48,4 +48,20 @@ public class ProductoProveedorTest : TestBase
         }
 
     }
+
+    [Test]
+    [Category("ProductoProveedor")]
+    public async Task ProveedoresConProductos()
+    {
+        var proveedoresProductos = await _productoProveedorServicio.GetProveedoresConProductosAsync();
+
+        foreach (var proveedor in proveedoresProductos)
+        {
+            Console.WriteLine($"Proveedor: {proveedor.NombreProveedor}, País: {proveedor.PaisOrigen}, RUC: {proveedor.Ruc}, Total Productos: {proveedor.TotalProductos}");
+            foreach (var producto in proveedor.Productos)
+            {
+                Console.WriteLine($"  Producto: {producto.Nombre}, Código: {producto.CodigoProducto}, Línea: {producto.LineaProducto}");
+            }
+        }
+    }
 }

@@ -11,9 +11,9 @@ namespace Carfaith.Dominio.Modelo.Abstracciones
     public interface IProductoProveedorRepositorio : IRepositorio<ProductoProveedor>
     {
         // Consulta N1
-        Task<IEnumerable<ProductoProveedorDetalleDTO>> GetProductoProveedorDetalleAsync();
+        public Task<IEnumerable<ProductoProveedorDetalleDTO>> GetProductoProveedorDetalleAsync();
 
         // Consulta N2
-        Task<IEnumerable<ProveedorProductosDTO>> GetProveedoresConProductosAsync();
+        public Task<IEnumerable<ProveedorProductosDTO>> GetProveedoresConProductosAsync();
     }
 }
