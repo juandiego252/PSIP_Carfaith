@@ -36,5 +36,10 @@ namespace Carfaith.Infraestructura.AccesoDatos.Repositorio
                         };
             return await query.ToListAsync();
         }
+
+        public Task<IEnumerable<ProveedorProductosDTO>> GetProveedoresConProductosAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

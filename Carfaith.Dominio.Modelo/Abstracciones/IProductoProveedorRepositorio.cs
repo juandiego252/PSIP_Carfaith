@@ -13,6 +13,7 @@ namespace Carfaith.Dominio.Modelo.Abstracciones
         // Consulta N1
         Task<IEnumerable<ProductoProveedorDetalleDTO>> GetProductoProveedorDetalleAsync();
 
-
+        // Consulta N2
+        Task<IEnumerable<ProveedorProductosDTO>> GetProveedoresConProductosAsync();
     }
 }
