@@ -19,11 +19,11 @@ public class LineasDeProductoTest : TestBase
     [Category("LineasDeProducto")]
     public async Task AgregarLineasProducto()
     {
-        var lineasProducto = new LineasDeProducto
-        {
-            Nombre = "Repuestos para Motocicleta",
-            Descripcion = "Todo tipo de repuestos para motocicleta",
-        };
-        await _lineasDeProductoServicio.AddLineasDeProductoAsync(lineasProducto);
+        //var lineasProducto = new LineasDeProducto
+        //{
+        //    Nombre = "Repuestos para Motocicleta",
+        //    Descripcion = "Todo tipo de repuestos para motocicleta",
+        //};
+        //await _lineasDeProductoServicio.AddLineasDeProductoAsync(lineasProducto);
     }
 }

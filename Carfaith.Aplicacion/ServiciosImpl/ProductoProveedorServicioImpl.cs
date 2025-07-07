@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Carfaith.Aplicacion.DTO.DTOs;
 using Carfaith.Aplicacion.Servicios;
 using Carfaith.Dominio.Modelo.Abstracciones;
 using Carfaith.Dominio.Modelo.Entidades;
@@ -19,6 +20,8 @@ namespace Carfaith.Aplicacion.ServiciosImpl
         {
             _productoProveedorRepositorio = new ProductoProveedorRepositorioImpl(_context);
         }
+
+        // CRUD de ProductoProveedor
         public async Task AddProductoProveedorAsync(ProductoProveedor productoProveedor)
         {
             if (productoProveedor == null)
@@ -52,9 +55,16 @@ namespace Carfaith.Aplicacion.ServiciosImpl
             return _productoProveedorRepositorio.GetByIdAsync(idProductoProveedor);
         }
 
+
         public async Task UpdateProductoProveedorAsync(ProductoProveedor productoProveedor)
         {
             await _productoProveedorRepositorio.UpdateAsync(productoProveedor);
+        }
+
+        // Consultas
+        public async Task<IEnumerable<ProductoProveedorDetalleDTO>> GetProductoProveedorDetallesAsync()
+        {
+            return await _productoProveedorRepositorio.GetProductoProveedorDetalleAsync();
         }
     }
 }

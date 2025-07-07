@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using Carfaith.Aplicacion.DTO.DTOs;
 using Carfaith.Dominio.Modelo.Entidades;
 
 namespace Carfaith.Aplicacion.Servicios
@@ -26,5 +27,10 @@ namespace Carfaith.Aplicacion.Servicios
 
         [OperationContract]
         Task<IEnumerable<ProductoProveedor>> GetAllProductoProveedorAsync();
+
+        // Consultas 
+
+        [OperationContract]
+        Task<IEnumerable<ProductoProveedorDetalleDTO>> GetProductoProveedorDetallesAsync();
     }
 }
