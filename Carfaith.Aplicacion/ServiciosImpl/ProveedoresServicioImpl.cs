@@ -34,7 +34,7 @@ namespace Carfaith.Aplicacion.ServiciosImpl
             }
 
             var existeProveedor = await _proveedoresRepositorio.GetProveedoresPorRucAsync(proveedores.Ruc);
-            if (existeProveedor != null)
+            if (existeProveedor.Any())
             {
                 throw new ArgumentException("El proveedor ya se encuentra registrado");
             }

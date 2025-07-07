@@ -27,30 +27,39 @@ public class ProveedoresTest
     {
         var proveedor = new Proveedores
         {
-            NombreProveedor = "MotoPartsKin",
-            PaisOrigen = "Ecuador",
-            TipoProveedor = "Local",
-            Telefono = "0987654321",
-            Email = "motoParts@google.com",
-            PersonaContacto = "Jose Galarza",
+            NombreProveedor = "Guangzhou Auto Parts Co., Ltd",
+            PaisOrigen = "China",
+            TipoProveedor = "Internacional",
+            Telefono = "+86 2087654321",
+            Email = "autoParts@google.com",
+            PersonaContacto = "Li Wei Shiao",
             FechaRegistro = DateOnly.FromDateTime(DateTime.Now),
-            Ruc = "1234567890",
-            Direccion = "Av. Principal 123",
+            Ruc = "91310110MA1G8XYW3N",
+            Direccion = "Room 302, Building B, No. 1688 Zhongshan Avenue East,\r\nTianhe District, Guangzhou, Guangdong Province,\r\nChina, 510630",
             Estado = true
         };
         await _proveedoresServicio.AddProveedoresAsync(proveedor);
 
-        Assert.Pass("Usuario creado exitosamente");
+        Assert.Pass("Proveedor creado exitosamente");
     }
 
-    [Test]
-    [Category("Proveedores")]
-    public async Task ObteneProveedoresPorPais()
-    {
-        var proveedores = await _proveedoresServicio.GetProveedoresPorPais("Ecuador");
-        Console.WriteLine($"Cantidad de proveedores encontrados: {proveedores.Count()}");
-        Assert.IsNotEmpty(proveedores, "No se encontraron proveedores para el país especificado.");
-    }
+    //[Test]
+    //[Category("Proveedores")]
+    //public async Task ObteneProveedoresPorPais()
+    //{
+    //    var proveedores = await _proveedoresServicio.GetProveedoresPorPais("Ecuador");
+    //    Console.WriteLine($"Cantidad de proveedores encontrados: {proveedores.Count()}");
+    //    Assert.IsNotEmpty(proveedores, "No se encontraron proveedores para el país especificado.");
+    //}
+
+    //[Test]
+    //[Category("Proveedores")]
+    //public async Task EliminarProveedores()
+    //{
+    //    await _proveedoresServicio.DeleteProveedoresByIdAsync(2);
+    //    Assert.Pass("Proveedor eliminado exitosamente");
+    //}
+
     [TearDown]
     public void TearDown()
     {

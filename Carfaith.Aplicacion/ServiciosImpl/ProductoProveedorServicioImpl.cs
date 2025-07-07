@@ -1,0 +1,60 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Carfaith.Aplicacion.Servicios;
+using Carfaith.Dominio.Modelo.Abstracciones;
+using Carfaith.Dominio.Modelo.Entidades;
+using Carfaith.Infraestructura.AccesoDatos.EFCore;
+using Carfaith.Infraestructura.AccesoDatos.Repositorio;
+
+namespace Carfaith.Aplicacion.ServiciosImpl
+{
+    public class ProductoProveedorServicioImpl : IProductoProveedorServicio
+    {
+        private readonly IProductoProveedorRepositorio _productoProveedorRepositorio;
+
+        public ProductoProveedorServicioImpl(CarfaithDbContext _context)
+        {
+            _productoProveedorRepositorio = new ProductoProveedorRepositorioImpl(_context);
+        }
+        public async Task AddProductoProveedorAsync(ProductoProveedor productoProveedor)
+        {
+            if (productoProveedor == null)
+            {
+                throw new ArgumentNullException(nameof(productoProveedor), "El producto proveedor no puede ser nulo.");
+            }
+            if (productoProveedor.IdProducto == null)
+            {
+                throw new ArgumentException("El ID del producto no puede ser nulo.", nameof(productoProveedor));
+            }
+            if (productoProveedor.IdProveedor == null)
+            {
+                throw new ArgumentException("El ID del proveedor no puede ser nulo.", nameof(productoProveedor));
+            }
+
+            await _productoProveedorRepositorio.AddAsync(productoProveedor);
+        }
+
+        public async Task DeleteProductoProveedorAsync(int idProductoProveedor)
+        {
+            await _productoProveedorRepositorio.DeleteAsync(idProductoProveedor);
+        }
+
+        public async Task<IEnumerable<ProductoProveedor>> GetAllProductoProveedorAsync()
+        {
+            return await _productoProveedorRepositorio.GetAllAsync();
+        }
+
+        public Task<ProductoProveedor> GetByIdProductoProveedorAsync(int idProductoProveedor)
+        {
+            return _productoProveedorRepositorio.GetByIdAsync(idProductoProveedor);
+        }
+
+        public async Task UpdateProductoProveedorAsync(ProductoProveedor productoProveedor)
+        {
+            await _productoProveedorRepositorio.UpdateAsync(productoProveedor);
+        }
+    }
+}
