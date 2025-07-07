@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Carfaith.Aplicacion.Servicios
 {
     [ServiceContract]
-    public interface IProductoService
+    public interface IProductoServicio
     {
         [OperationContract]
         Task AddProductoAsync(Producto producto);

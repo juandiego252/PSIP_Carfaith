@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Carfaith.Aplicacion.ServiciosImpl
 {
-    public class ProductoServiceImpl : IProductoService
+    public class ProductoServicioImpl : IProductoServicio
     {
         private readonly IProductoRepositorio _productoRepositorio;
 
-        public ProductoServiceImpl(CarfaithDbContext _context)
+        public ProductoServicioImpl(CarfaithDbContext _context)
         {
             _productoRepositorio = new ProductoRepositorioImpl(_context);
         }
