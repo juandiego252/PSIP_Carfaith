@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Carfaith.Aplicacion.DTO\Carfaith.Aplicacion.DTO.csproj" />
     <ProjectReference Include="..\Carfaith.Aplicacion\Carfaith.Aplicacion.csproj" />
     <ProjectReference Include="..\Carfaith.Dominio.Modelo\Carfaith.Dominio.Modelo.csproj" />
