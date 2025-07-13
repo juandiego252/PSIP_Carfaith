@@ -18,6 +18,7 @@ builder.Services.AddDbContext<CarfaithDbContext>(options => options.UseSqlServer
 // Entidades a usar para las APIS
 builder.Services.AddScoped<IProductoServicio, ProductoServicioImpl>();
 builder.Services.AddScoped<IProveedoresServicio, ProveedoresServicioImpl>();
+builder.Services.AddScoped<ILineasDeProductoServicio, LineasDeProductoServicioImpl>();
 
 var app = builder.Build();
 

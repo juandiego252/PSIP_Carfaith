@@ -5,17 +5,23 @@ using Microsoft.AspNetCore.Mvc;
 namespace Carfaith_API.Controllers
 {
     [ApiController]
-    [Route("api/[Controller]")]
-    public class ProductoController : ControllerBase
+    [Route("api/productos")]
+    public class ProductoControlador : ControllerBase
     {
         private IProductoServicio _productoServicio;
 
-        public ProductoController(IProductoServicio productoServicio)
+        public ProductoControlador(IProductoServicio productoServicio)
         {
             _productoServicio = productoServicio;
         }
 
-        [HttpPost("producto")]
+        [HttpGet("listarProductos")]
+        public Task<IEnumerable<Producto>> ObtenerProductos()
+        {
+            return _productoServicio.GetAllProductoAsync();
+        }
+
+        [HttpPost("agregarProducto")]
         public async Task<IActionResult> InsertarDatosProductos([FromBody] Producto producto)
         {
             try
