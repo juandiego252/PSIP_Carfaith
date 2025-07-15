@@ -31,7 +31,7 @@ namespace PruebasCarfaithSQL
             {
                 NombreCompleto = "Juan Diego",
                 Email = "juandiegojd252@google.com",
-                Contraseña = "Jdpachon252",
+                Contraseña = "admin12345",
             };
             await _usuariosServicio.AddUsuariosAsync(usuario);
             Assert.Pass("Usuario creado exitosamente");
@@ -41,7 +41,7 @@ namespace PruebasCarfaithSQL
         [Category("Integration")]
         public async Task BorrarUsuario()
         {
-            int idUsuarioAEliminar = 1;
+            int idUsuarioAEliminar = 2;
             await _usuariosServicio.DeleteUsuariosByIdAsync(idUsuarioAEliminar);
             Assert.Pass("Usuario eliminado correctamente.");
         }
