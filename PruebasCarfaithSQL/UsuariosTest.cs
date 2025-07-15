@@ -29,9 +29,9 @@ namespace PruebasCarfaithSQL
         {
             var usuario = new Usuarios
             {
-                NombreCompleto = "Juan Diego",
-                Email = "juandiegojd252@google.com",
-                Contraseña = "admin12345",
+                NombreCompleto = "Bryan Cabrera",
+                Email = "bryanc@google.com",
+                Contraseña = "admin123",
             };
             await _usuariosServicio.AddUsuariosAsync(usuario);
             Assert.Pass("Usuario creado exitosamente");
