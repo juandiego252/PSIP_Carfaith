@@ -1,11 +1,13 @@
 ﻿using Carfaith.Aplicacion.Servicios;
 using Carfaith.Dominio.Modelo.Entidades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Carfaith_API.Controllers
 {
     [ApiController]
     [Route("api/[Controller]")]
+    [Authorize]
     public class ProductoController : ControllerBase
     {
         private IProductoServicio _productoServicio;
