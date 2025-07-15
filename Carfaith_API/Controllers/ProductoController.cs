@@ -17,7 +17,7 @@ namespace Carfaith_API.Controllers
             _productoServicio = productoServicio;
         }
 
-        [HttpPost("crearProducto")]
+        [HttpPost("CrearProductos")]
         public async Task<IActionResult> CrearProductos([FromBody] Producto producto)
         {
             try
@@ -33,7 +33,7 @@ namespace Carfaith_API.Controllers
             }
         }
 
-        [HttpGet("productos")]
+        [HttpGet("ListarProductos")]
         public async Task<IActionResult> GetProductos()
         {
             try
@@ -48,7 +48,7 @@ namespace Carfaith_API.Controllers
             }
         }
 
-        [HttpGet("producto/{id}")]
+        [HttpGet("ObtenerProductoPorId/{id}")]
         public async Task<IActionResult> GetProductoById(int id)
         {
             try
@@ -56,6 +56,36 @@ namespace Carfaith_API.Controllers
                 var producto = await _productoServicio.GetByIdProductoAsync(id);
                 return Ok(producto);
 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Se produjo un error: " + ex.ToString());
+                return StatusCode(500, "Error interno");
+            }
+        }
+
+        [HttpPut("EditarProducto")]
+        public async Task<IActionResult> EditarProducto([FromBody] Producto producto)
+        {
+            try
+            {
+                await _productoServicio.UpdateProductoAsync(producto);
+                return Ok(producto);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Se produjo un error: " + ex.ToString());
+                return StatusCode(500, "Error interno");
+            }
+        }
+
+        [HttpDelete("EliminarProducto/{id}")]
+        public async Task<IActionResult> EliminarProducto(int id)
+        {
+            try
+            {
+                await _productoServicio.DeleteProductoByIdAsync(id);
+                return Ok($"Producto con id {id} eliminado correctamente.");
             }
             catch (Exception ex)
             {
