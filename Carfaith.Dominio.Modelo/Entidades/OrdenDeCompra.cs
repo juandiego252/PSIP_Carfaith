@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Carfaith.Dominio.Modelo.Entidades;
 
@@ -19,9 +20,10 @@ public partial class OrdenDeCompra
 
     public DateOnly? FechaEstimadaEntrega { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<DetalleOrdenCompra> DetalleOrdenCompras { get; set; } = new List<DetalleOrdenCompra>();
-
+    [JsonIgnore]
     public virtual Proveedores? IdProveedorNavigation { get; set; }
-
+    [JsonIgnore]
     public virtual ICollection<OrdenDeIngreso> OrdenDeIngresos { get; set; } = new List<OrdenDeIngreso>();
 }

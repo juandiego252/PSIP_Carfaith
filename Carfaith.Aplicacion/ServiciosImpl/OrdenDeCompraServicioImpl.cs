@@ -41,7 +41,21 @@ namespace Carfaith.Aplicacion.ServiciosImpl
 
         public async Task UpdateOrdenDeCompraAsync(OrdenDeCompra ordenDeCompra)
         {
-            await _ordenDeCompraRepositorio.UpdateAsync(ordenDeCompra);
+            var ordenCompraExistente = await _ordenDeCompraRepositorio.GetByIdAsync(ordenDeCompra.IdOrden);
+            if (ordenCompraExistente == null)
+            {
+                throw new ArgumentException($"No se encontró una orden de compra con ID {ordenDeCompra.IdOrden}", nameof(ordenDeCompra));
+            }
+
+            //Actualizar los campos necesarios
+            ordenCompraExistente.NumeroOrden = ordenDeCompra.NumeroOrden;
+            ordenCompraExistente.FechaCreacion = ordenDeCompra.FechaCreacion;
+            ordenCompraExistente.IdProveedor = ordenDeCompra.IdProveedor;
+            ordenCompraExistente.Estado = ordenDeCompra.Estado;
+            ordenCompraExistente.FechaEstimadaEntrega = ordenDeCompra.FechaEstimadaEntrega;
+            ordenCompraExistente.ArchivoPdf = ordenDeCompra.ArchivoPdf;
+
+            await _ordenDeCompraRepositorio.UpdateAsync(ordenCompraExistente);
         }
     }
 }

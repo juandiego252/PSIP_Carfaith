@@ -1,27 +1,24 @@
 ﻿using Carfaith.Aplicacion.Servicios;
 using Carfaith.Dominio.Modelo.Entidades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Carfaith_API.Controllers
 {
     [ApiController]
-    [Route("api/productos")]
-    public class ProductoControlador : ControllerBase
+    [Route("api/[Controller]")]
+    [Authorize]
+    public class ProductoController : ControllerBase
     {
         private IProductoServicio _productoServicio;
 
-        public ProductoControlador(IProductoServicio productoServicio)
+        public ProductoController(IProductoServicio productoServicio)
         {
             _productoServicio = productoServicio;
         }
 
-        [HttpGet("listarProductos")]
-        public Task<IEnumerable<Producto>> ObtenerProductos()
-        {
-            return _productoServicio.GetAllProductoAsync();
-        }
-
-        [HttpPost("crearProducto")]
+=
+        [HttpPost("CrearProductos")]
         public async Task<IActionResult> CrearProductos([FromBody] Producto producto)
         {
             try
@@ -37,7 +34,7 @@ namespace Carfaith_API.Controllers
             }
         }
 
-        [HttpGet("productos")]
+        [HttpGet("ListarProductos")]
         public async Task<IActionResult> GetProductos()
         {
             try
@@ -52,7 +49,7 @@ namespace Carfaith_API.Controllers
             }
         }
 
-        [HttpGet("producto/{id}")]
+        [HttpGet("ObtenerProductoPorId/{id}")]
         public async Task<IActionResult> GetProductoById(int id)
         {
             try
@@ -60,6 +57,36 @@ namespace Carfaith_API.Controllers
                 var producto = await _productoServicio.GetByIdProductoAsync(id);
                 return Ok(producto);
 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Se produjo un error: " + ex.ToString());
+                return StatusCode(500, "Error interno");
+            }
+        }
+
+        [HttpPut("EditarProducto")]
+        public async Task<IActionResult> EditarProducto([FromBody] Producto producto)
+        {
+            try
+            {
+                await _productoServicio.UpdateProductoAsync(producto);
+                return Ok(producto);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Se produjo un error: " + ex.ToString());
+                return StatusCode(500, "Error interno");
+            }
+        }
+
+        [HttpDelete("EliminarProducto/{id}")]
+        public async Task<IActionResult> EliminarProducto(int id)
+        {
+            try
+            {
+                await _productoServicio.DeleteProductoByIdAsync(id);
+                return Ok($"Producto con id {id} eliminado correctamente.");
             }
             catch (Exception ex)
             {

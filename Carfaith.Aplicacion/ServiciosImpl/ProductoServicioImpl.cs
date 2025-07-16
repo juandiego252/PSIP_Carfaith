@@ -60,7 +60,13 @@ namespace Carfaith.Aplicacion.ServiciosImpl
 
         public async Task UpdateProductoAsync(Producto producto)
         {
-            await _productoRepositorio.UpdateAsync(producto);
+            var productoExistente = await _productoRepositorio.GetByIdAsync(producto.IdProducto);
+            if (productoExistente == null)
+            {
+                throw new KeyNotFoundException($"Producto con ID {producto.IdProducto} no encontrado.");
+            }
+            await _productoRepositorio.UpdateAsync(productoExistente);
+
         }
     }
 }

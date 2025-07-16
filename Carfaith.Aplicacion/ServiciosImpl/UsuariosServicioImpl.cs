@@ -90,5 +90,23 @@ namespace Carfaith.Aplicacion.ServiciosImpl
 
             await _usuariosRepositorio.UpdateAsync(usuarioExistente);
         }
+
+        public async Task<bool> VerifyUsuariosAsync(string email, string password)
+        {
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                return false;
+            }
+
+            var usuarios = await _usuariosRepositorio.GetAllAsync();
+            var usuario = usuarios.FirstOrDefault(u => u.Email == email);
+
+            if (usuario == null)
+            {
+                return false; // Usuario no encontrado
+            }
+
+            return BCrypt.Net.BCrypt.Verify(password, usuario.Contraseña); // Verifica la contraseña
+        }
     }
 }

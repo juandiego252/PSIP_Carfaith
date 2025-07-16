@@ -23,5 +23,8 @@ namespace Carfaith.Aplicacion.Servicios
 
         [OperationContract]
         Task DeleteUsuariosByIdAsync(int id);
+
+        [OperationContract]
+        Task<bool> VerifyUsuariosAsync(string email, string password);
     }
 }
