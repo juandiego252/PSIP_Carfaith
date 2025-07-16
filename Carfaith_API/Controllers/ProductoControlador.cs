@@ -21,19 +21,49 @@ namespace Carfaith_API.Controllers
             return _productoServicio.GetAllProductoAsync();
         }
 
-        [HttpPost("agregarProducto")]
-        public async Task<IActionResult> InsertarDatosProductos([FromBody] Producto producto)
+        [HttpPost("crearProducto")]
+        public async Task<IActionResult> CrearProductos([FromBody] Producto producto)
         {
             try
             {
                 await _productoServicio.AddProductoAsync(producto);
 
-                return Ok();
+                return Ok(producto);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Se produjo un error: " + ex.ToString());
+                return StatusCode(500, "Error interno");
+            }
+        }
 
+        [HttpGet("productos")]
+        public async Task<IActionResult> GetProductos()
+        {
+            try
+            {
+                var productos = await _productoServicio.GetAllProductoAsync();
+                return Ok(productos);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Se produjo un error: " + ex.ToString());
+                return StatusCode(500, "Error interno");
+            }
+        }
+
+        [HttpGet("producto/{id}")]
+        public async Task<IActionResult> GetProductoById(int id)
+        {
+            try
+            {
+                var producto = await _productoServicio.GetByIdProductoAsync(id);
+                return Ok(producto);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Se produjo un error: " + ex.ToString());
                 return StatusCode(500, "Error interno");
             }
         }

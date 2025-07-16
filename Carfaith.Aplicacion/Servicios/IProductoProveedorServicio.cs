@@ -34,7 +34,7 @@ namespace Carfaith.Aplicacion.Servicios
         Task<IEnumerable<ProductoProveedorDetalleDTO>> GetProductoProveedorDetallesAsync();
 
         [OperationContract]
-        public Task<IEnumerable<ProveedorProductosDTO>> GetProveedoresConProductosAsync();
+        Task<IEnumerable<ProveedorProductosDTO>> GetProveedoresConProductosAsync();
 
         [OperationContract]
         Task<IEnumerable<LineaProductoProveedoresDTO>> GetLineasConProveedoresAsync();

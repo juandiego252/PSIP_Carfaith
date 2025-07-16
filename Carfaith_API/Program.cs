@@ -12,13 +12,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Configuracion de la base de datos
 var connectDB = builder.Configuration.GetConnectionString("ConexionDBCarFaith");
 builder.Services.AddDbContext<CarfaithDbContext>(options => options.UseSqlServer(connectDB));
 
-// Entidades a usar para las APIS
+// Inyeccion de dependencias para los servicios
 builder.Services.AddScoped<IProductoServicio, ProductoServicioImpl>();
 builder.Services.AddScoped<IProveedoresServicio, ProveedoresServicioImpl>();
 builder.Services.AddScoped<ILineasDeProductoServicio, LineasDeProductoServicioImpl>();
+builder.Services.AddScoped<IOrdenDeCompraServicio, OrdenDeCompraServicioImpl>();
 
 var app = builder.Build();
 
