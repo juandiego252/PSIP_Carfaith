@@ -14,12 +14,10 @@ namespace Carfaith.Aplicacion.ServiciosImpl
     public class ProductoServicioImpl : IProductoServicio
     {
         private readonly IProductoRepositorio _productoRepositorio;
-        private readonly CarfaithDbContext _carfaithDbContext;
 
         public ProductoServicioImpl(CarfaithDbContext _context)
         {
-            _carfaithDbContext = _context;
-            _productoRepositorio = new ProductoRepositorioImpl(_carfaithDbContext);
+            _productoRepositorio = new ProductoRepositorioImpl(_context);
         }
 
         public async Task AddProductoAsync(Producto producto)

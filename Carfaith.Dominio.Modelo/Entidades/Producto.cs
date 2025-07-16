@@ -6,6 +6,7 @@ namespace Carfaith.Dominio.Modelo.Entidades;
 
 public partial class Producto
 {
+    
     public int IdProducto { get; set; }
 
     public string? CodigoProducto { get; set; }

@@ -36,7 +36,13 @@ namespace Carfaith.Aplicacion.ServiciosImpl
             {
                 throw new ArgumentException("El ID del proveedor no puede ser nulo.", nameof(productoProveedor));
             }
+            // Verificar si ya existe una asociación entre el producto y el proveedor
+            var productoProveedorExist = await _productoProveedorRepositorio.ProductoProveedorExist(productoProveedor.IdProducto, productoProveedor.IdProveedor);
 
+            if (productoProveedorExist)
+            {
+                throw new InvalidOperationException("Ya existe una asociación entre el producto y el proveedor especificados.");
+            }
             await _productoProveedorRepositorio.AddAsync(productoProveedor);
         }
 
@@ -74,7 +80,7 @@ namespace Carfaith.Aplicacion.ServiciosImpl
 
         public async Task<IEnumerable<LineaProductoProveedoresDTO>> GetLineasConProveedoresAsync()
         {
-             return await _productoProveedorRepositorio.GetLineasConProveedoresAsync();
+            return await _productoProveedorRepositorio.GetLineasConProveedoresAsync();
         }
 
         public async Task<IEnumerable<ProductoPorLineaProveedorDTO>> GetProductosPorLineaProveedorAsync()

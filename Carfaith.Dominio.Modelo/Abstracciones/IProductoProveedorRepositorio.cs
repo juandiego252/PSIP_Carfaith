@@ -33,5 +33,7 @@ namespace Carfaith.Dominio.Modelo.Abstracciones
 
         // Consulta N7
         Task<IEnumerable<ProductoProveedorDetalleDTO>> GetProductosProveedoresPorPaisAsync(string paisOrigen);
+
+        Task<bool> ProductoProveedorExist(int? idProducto, int? idProveedor);
     }
 }
