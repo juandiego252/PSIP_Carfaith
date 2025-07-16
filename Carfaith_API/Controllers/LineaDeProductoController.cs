@@ -6,11 +6,11 @@ namespace Carfaith_API.Controllers
 {
     [ApiController]
     [Route("api/lineaProductos")]
-    public class LineaDeProductoControlador : ControllerBase
+    public class LineaDeProductoController : ControllerBase
     {
         private readonly ILineasDeProductoServicio _lineaProductoServicio;
 
-        public LineaDeProductoControlador(ILineasDeProductoServicio lineaProductoServicio)
+        public LineaDeProductoController(ILineasDeProductoServicio lineaProductoServicio)
         {
             _lineaProductoServicio = lineaProductoServicio;
         }

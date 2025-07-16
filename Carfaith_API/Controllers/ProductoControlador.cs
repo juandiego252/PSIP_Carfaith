@@ -17,7 +17,6 @@ namespace Carfaith_API.Controllers
             _productoServicio = productoServicio;
         }
 
-=
         [HttpPost("CrearProductos")]
         public async Task<IActionResult> CrearProductos([FromBody] Producto producto)
         {
