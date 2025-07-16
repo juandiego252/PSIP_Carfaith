@@ -49,6 +49,7 @@ builder.Services.AddDbContext<CarfaithDbContext>(options => options.UseSqlServer
 // Inyeccion de dependencias para los servicios
 builder.Services.AddScoped<IProductoServicio, ProductoServicioImpl>();
 builder.Services.AddScoped<IProveedoresServicio, ProveedoresServicioImpl>();
+builder.Services.AddScoped<ILineasDeProductoServicio, LineasDeProductoServicioImpl>();
 builder.Services.AddScoped<IOrdenDeCompraServicio, OrdenDeCompraServicioImpl>();
 builder.Services.AddScoped<IUsuariosServicio, UsuariosServicioImpl>();
 builder.Services.AddScoped<IProductoProveedorServicio, ProductoProveedorServicioImpl>();

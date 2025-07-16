@@ -8,11 +8,11 @@ namespace Carfaith_API.Controllers
     [ApiController]
     [Route("api/[Controller]")]
     [Authorize]
-    public class ProductoController : ControllerBase
+    public class ProductoControlador : ControllerBase
     {
         private IProductoServicio _productoServicio;
 
-        public ProductoController(IProductoServicio productoServicio)
+        public ProductoControlador(IProductoServicio productoServicio)
         {
             _productoServicio = productoServicio;
         }
