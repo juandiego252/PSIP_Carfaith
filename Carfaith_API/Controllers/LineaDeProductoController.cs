@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Carfaith_API.Controllers
 {
     [ApiController]
-    [Route("api/lineaProductos")]
+    [Route("api/[controller]")]
     public class LineaDeProductoController : ControllerBase
     {
         private readonly ILineasDeProductoServicio _lineaProductoServicio;
