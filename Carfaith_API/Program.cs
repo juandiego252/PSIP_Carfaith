@@ -55,6 +55,8 @@ builder.Services.AddScoped<IUsuariosServicio, UsuariosServicioImpl>();
 builder.Services.AddScoped<IProductoProveedorServicio, ProductoProveedorServicioImpl>();
 builder.Services.AddScoped<IOrdenDeIngresoServicio, OrdenDeIngresoServicioImpl>();
 builder.Services.AddScoped<IUbicacionesServicio, UbicacionesServicioImpl>();
+builder.Services.AddScoped<IStockServicio, StockServicioImpl>();
+builder.Services.AddScoped<ITransferenciasServicio, TransferenciasServicioImpl>();
 
 // Configuracion de autenticacion
 builder.Services.AddAuthentication("BasicAuthentication")
