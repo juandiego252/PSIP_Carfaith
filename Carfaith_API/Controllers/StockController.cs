@@ -33,6 +33,26 @@ namespace Carfaith_API.Controllers
             }
         }
 
+        [HttpGet("ListarInfoStock")]
+        public async Task<IActionResult> ListarInfoStock()
+        {
+            try
+            {
+                var stockList = await _stockServicio.GetstockProductoProveedorUbicacionDTOs();
+                if (stockList == null || !stockList.Any())
+                {
+                    return NotFound(new { message = "No se encontraron registros de stock." });
+                }
+                return Ok(stockList);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Se produjo un error: " + ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Error al obtener los registros de stock.", error = ex.Message });
+            }
+        }
+
+
         [HttpPut("ActualizarStock")]
         public async Task<IActionResult> EditarStock([FromBody] Stock stock)
         {

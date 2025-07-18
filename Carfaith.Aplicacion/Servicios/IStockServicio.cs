@@ -1,4 +1,5 @@
-﻿using Carfaith.Dominio.Modelo.Entidades;
+﻿using Carfaith.Aplicacion.DTO.DTOs;
+using Carfaith.Dominio.Modelo.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,5 +26,9 @@ namespace Carfaith.Aplicacion.Servicios
 
         [OperationContract]
         Task<Stock> GetStockById(int id);
+
+        // Consulta 
+        [OperationContract]
+        Task<IEnumerable<StockProductoProveedorUbicacionDTO>> GetstockProductoProveedorUbicacionDTOs();
     }
 }
