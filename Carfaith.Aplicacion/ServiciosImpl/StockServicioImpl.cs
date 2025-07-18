@@ -1,4 +1,5 @@
-﻿using Carfaith.Aplicacion.Servicios;
+﻿using Carfaith.Aplicacion.DTO.DTOs;
+using Carfaith.Aplicacion.Servicios;
 using Carfaith.Dominio.Modelo.Abstracciones;
 using Carfaith.Dominio.Modelo.Entidades;
 using Carfaith.Infraestructura.AccesoDatos.EFCore;
@@ -43,6 +44,12 @@ namespace Carfaith.Aplicacion.ServiciosImpl
         public async Task UpdateStockAsync(Stock stock)
         {
             await _stockRepositorio.UpdateAsync(stock);
+        }
+
+        // Consulta
+        public async Task<IEnumerable<StockProductoProveedorUbicacionDTO>> GetStockProductoProveedorUbicacionDTO()
+        {
+            return await _stockRepositorio.GetStockProductoProveedorUbicacionDTO();
         }
     }
 }

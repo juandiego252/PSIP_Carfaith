@@ -1,4 +1,5 @@
-﻿using Carfaith.Dominio.Modelo.Entidades;
+﻿using Carfaith.Aplicacion.DTO.DTOs;
+using Carfaith.Dominio.Modelo.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace Carfaith.Dominio.Modelo.Abstracciones
 {
     public interface IStockRepositorio : IRepositorio<Stock>
     {
+        Task<IEnumerable<StockProductoProveedorUbicacionDTO>> GetStockProductoProveedorUbicacionDTO();
     }
 }
