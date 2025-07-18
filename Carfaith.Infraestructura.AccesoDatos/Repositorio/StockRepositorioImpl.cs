@@ -19,6 +19,40 @@ namespace Carfaith.Infraestructura.AccesoDatos.Repositorio
             _context = context;
         }
 
+        public async Task<Stock> ActualizarStockPorTransferenciaAsync(int idProductoProveedor, int idUbicacion, int cantidad)
+        {
+            var stock = await _context.Stocks.FirstOrDefaultAsync(s => s.IdProductoProveedor == idProductoProveedor && s.IdUbicacion == idUbicacion);
+
+            if (stock != null)
+            {
+                stock.Cantidad = (stock.Cantidad ?? 0) + cantidad;
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                stock = new Stock
+                {
+                    IdProductoProveedor = idProductoProveedor,
+                    IdUbicacion = idUbicacion,
+                    Cantidad = cantidad > 0 ? cantidad : 0
+                };
+                _context.Stocks.Add(stock);
+                await _context.SaveChangesAsync();
+            }
+
+            return stock;
+
+        }
+
+        public async Task<Stock> GetStockByProductoProveedorYUbicacionAsync(int idProductoProveedor, int idUbicacion)
+        {
+            var query = (from stock in _context.Stocks
+                         where stock.IdProductoProveedor == idProductoProveedor && stock.IdUbicacion == idUbicacion
+                         select stock).FirstOrDefaultAsync();
+
+            return await query;
+        }
+
         public async Task<IEnumerable<StockProductoProveedorUbicacionDTO>> GetStockProductoProveedorUbicacionDto()
         {
             var query = from stock in _context.Stocks

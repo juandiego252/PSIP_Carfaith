@@ -23,6 +23,11 @@ namespace Carfaith.Aplicacion.ServiciosImpl
 
         public async Task AddStockAsync(Stock stock)
         {
+            if (stock.Cantidad < 0)
+            {
+                throw new ArgumentException("La cantidad del stock no puede ser negativa.");
+            }
+
             await _stockRepositorio.AddAsync(stock);
         }
 
@@ -49,6 +54,16 @@ namespace Carfaith.Aplicacion.ServiciosImpl
         public async Task<IEnumerable<StockProductoProveedorUbicacionDTO>> GetstockProductoProveedorUbicacionDTOs()
         {
             return await _stockRepositorio.GetStockProductoProveedorUbicacionDto();
+        }
+
+        public async Task<Stock> GetStockByProductoProveedorYUbicacionAsync(int idProductoProveedor, int idUbicacion)
+        {
+            return await _stockRepositorio.GetStockByProductoProveedorYUbicacionAsync(idProductoProveedor, idUbicacion);
+        }
+
+        public async Task<Stock> ActualizarStockPorTransferenciaAsync(int idProductoProveedor, int idUbicacion, int cantidad)
+        {
+            return await _stockRepositorio.ActualizarStockPorTransferenciaAsync(idProductoProveedor, idUbicacion, cantidad);
         }
     }
 }

@@ -30,5 +30,12 @@ namespace Carfaith.Aplicacion.Servicios
         // Consulta 
         [OperationContract]
         Task<IEnumerable<StockProductoProveedorUbicacionDTO>> GetstockProductoProveedorUbicacionDTOs();
+
+        [OperationContract]
+        Task<Stock> GetStockByProductoProveedorYUbicacionAsync(int idProductoProveedor, int idUbicacion);
+
+        [OperationContract]
+        Task<Stock> ActualizarStockPorTransferenciaAsync(int idProductoProveedor, int idUbicacion, int cantidad);
+
     }
 }

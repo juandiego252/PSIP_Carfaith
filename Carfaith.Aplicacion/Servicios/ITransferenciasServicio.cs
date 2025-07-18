@@ -25,5 +25,13 @@ namespace Carfaith.Aplicacion.Servicios
 
         [OperationContract]
         Task<Transferencias> GetTransferenciasById(int id);
+
+
+        // Consultas
+        [OperationContract]
+        Task<IEnumerable<Transferencias>> GetAllTransferenciasWithRelationsAsync();
+
+        [OperationContract]
+        Task<Transferencias> GetTransferenciaByIdWithRelationsAsync(int id);
     }
 }

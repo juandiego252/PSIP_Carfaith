@@ -37,7 +37,6 @@ namespace Carfaith.Aplicacion.ServiciosImpl
         {
             return await _transferenciasRepositorio.GetAllAsync();
         }
-
         public async Task<Transferencias> GetTransferenciasById(int id)
         {
             return await _transferenciasRepositorio.GetByIdAsync(id);
@@ -46,6 +45,16 @@ namespace Carfaith.Aplicacion.ServiciosImpl
         public async Task UpdateTransferenciasAsync(Transferencias transferencias)
         {
             await _transferenciasRepositorio.UpdateAsync(transferencias);
+        }
+
+        public async Task<IEnumerable<Transferencias>> GetAllTransferenciasWithRelationsAsync()
+        {
+            return await _transferenciasRepositorio.GetAllTransferenciasWithRelationsAsync();
+        }
+
+        public async Task<Transferencias> GetTransferenciaByIdWithRelationsAsync(int id)
+        {
+            return await _transferenciasRepositorio.GetTransferenciaByIdWithRelationsAsync(id);
         }
     }
 }
