@@ -65,5 +65,10 @@ namespace Carfaith.Aplicacion.ServiciosImpl
         {
             return await _stockRepositorio.ActualizarStockPorTransferenciaAsync(idProductoProveedor, idUbicacion, cantidad);
         }
+
+        public async Task<Stock> ActualizarStockAsync(int idProductoProveedor, int idUbicacion, int cantidad)
+        {
+            return await _stockRepositorio.ActualizarStockPorTransferenciaAsync(idProductoProveedor, idUbicacion, cantidad);
+        }
     }
 }

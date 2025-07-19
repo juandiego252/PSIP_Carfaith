@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Carfaith.Dominio.Modelo.Entidades;
 
@@ -15,5 +16,6 @@ public partial class OrdenEgreso
 
     public string? Estado { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<DetalleOrdenEgreso> DetalleOrdenEgresos { get; set; } = new List<DetalleOrdenEgreso>();
 }

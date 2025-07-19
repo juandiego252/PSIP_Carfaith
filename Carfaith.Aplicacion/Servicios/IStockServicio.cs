@@ -37,5 +37,9 @@ namespace Carfaith.Aplicacion.Servicios
         [OperationContract]
         Task<Stock> ActualizarStockPorTransferenciaAsync(int idProductoProveedor, int idUbicacion, int cantidad);
 
+
+        [OperationContract]
+        Task<Stock> ActualizarStockAsync(int idProductoProveedor, int idUbicacion, int cantidad);
+
     }
 }
