@@ -63,6 +63,17 @@ builder.Services.AddScoped<IOrdenEgresoServicio, OrdenEgresoServicioImpl>();
 builder.Services.AddScoped<IOrdenEgresoStockServicio, OrdenEgresoStockServicioImpl>();
 builder.Services.AddScoped<IDetalleOrdenEgresoServicio, DetalleOrdenEgresoServicioImpl>();
 
+// Configuracion de CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("NewPolicy", app =>
+    {
+        app.AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
+
 // Configuracion de autenticacion
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthHandler>("BasicAuthentication", null);
@@ -76,6 +87,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("NewPolicy");
 
 app.UseAuthentication();
 
