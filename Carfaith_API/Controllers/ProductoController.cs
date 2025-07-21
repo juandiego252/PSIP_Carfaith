@@ -38,7 +38,7 @@ namespace Carfaith_API.Controllers
         {
             try
             {
-                var productos = await _productoServicio.GetAllProductoAsync();
+                var productos = await _productoServicio.GetProductosResumen();
                 return Ok(productos);
             }
             catch (Exception ex)

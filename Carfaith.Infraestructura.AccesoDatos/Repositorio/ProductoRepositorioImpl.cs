@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Carfaith.Aplicacion.DTO.DTOs;
 using Carfaith.Dominio.Modelo.Abstracciones;
 using Carfaith.Dominio.Modelo.Entidades;
 using Carfaith.Infraestructura.AccesoDatos.EFCore;
@@ -16,6 +17,22 @@ namespace Carfaith.Infraestructura.AccesoDatos.Repositorio
         public ProductoRepositorioImpl(CarfaithDbContext context) : base(context)
         {
             _context = context;
+        }
+
+        public async Task<IEnumerable<ProductoResumenDTO>> GetProductosResumen()
+        {
+            var query = from p in _context.Productos
+                        join lineaProducto in _context.LineasDeProductos on p.LineaDeProducto equals lineaProducto.IdLinea
+                        select new ProductoResumenDTO
+                        {
+                            IdProducto = p.IdProducto,
+                            NombreProducto = p.Nombre,
+                            CodigoProducto = p.CodigoProducto,
+                            IdLineaProdcuto = lineaProducto.IdLinea,
+                            NombreLineaProducto = lineaProducto.Nombre
+                        };
+
+            return await query.ToListAsync();
         }
 
         public async Task<bool> IsCodigoProductoUnique(string codigoProducto)

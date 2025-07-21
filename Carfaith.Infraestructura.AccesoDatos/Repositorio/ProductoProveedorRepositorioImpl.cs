@@ -124,9 +124,9 @@ namespace Carfaith.Infraestructura.AccesoDatos.Repositorio
                                          select new ProductoResumenDTO
                                          {
                                              IdProducto = producto.IdProducto,
-                                             Nombre = producto.Nombre!,
+                                             NombreProducto = producto.Nombre,
                                              CodigoProducto = producto.CodigoProducto!,
-                                             LineaProducto = lineasProducto.Nombre!,
+                                             NombreLineaProducto = lineasProducto.Nombre!,
                                          }).ToList()
                         };
 

@@ -1,4 +1,5 @@
-﻿using Carfaith.Aplicacion.Servicios;
+﻿using Carfaith.Aplicacion.DTO.DTOs;
+using Carfaith.Aplicacion.Servicios;
 using Carfaith.Dominio.Modelo.Abstracciones;
 using Carfaith.Dominio.Modelo.Entidades;
 using Carfaith.Infraestructura.AccesoDatos.EFCore;
@@ -65,6 +66,11 @@ namespace Carfaith.Aplicacion.ServiciosImpl
             }
             await _productoRepositorio.UpdateAsync(productoExistente);
 
+        }
+
+        public async Task<IEnumerable<ProductoResumenDTO>> GetProductosResumen()
+        {
+            return await _productoRepositorio.GetProductosResumen();
         }
     }
 }
