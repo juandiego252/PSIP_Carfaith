@@ -64,6 +64,11 @@ namespace Carfaith.Aplicacion.ServiciosImpl
             {
                 throw new KeyNotFoundException($"Producto con ID {producto.IdProducto} no encontrado.");
             }
+
+            productoExistente.Nombre = producto.Nombre;
+            productoExistente.CodigoProducto = producto.CodigoProducto;
+            productoExistente.LineaDeProducto = producto.LineaDeProducto;
+
             await _productoRepositorio.UpdateAsync(productoExistente);
 
         }
