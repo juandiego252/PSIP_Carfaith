@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Carfaith.Aplicacion.DTO.DTOs.OrdenDeCompra;
 using Carfaith.Aplicacion.Servicios;
 using Carfaith.Dominio.Modelo.Abstracciones;
 using Carfaith.Dominio.Modelo.Entidades;
@@ -29,9 +30,10 @@ namespace Carfaith.Aplicacion.ServiciosImpl
             await _ordenDeCompraRepositorio.DeleteAsync(id);
         }
 
-        public async Task<IEnumerable<OrdenDeCompra>> GetAllOrdenDeCompraAsync()
+        public async Task<IEnumerable<OrdenDeCompraInfoDTO>> GetAllOrdenDeCompraAsync()
         {
-            return await _ordenDeCompraRepositorio.GetAllAsync();
+            /*return await _ordenDeCompraRepositorio.GetAllAsync();*/
+            return await _ordenDeCompraRepositorio.GetOrdenesDeCompraProveedor();
         }
 
         public async Task<OrdenDeCompra> GetByIdOrdenDeCompraAsync(int id)
