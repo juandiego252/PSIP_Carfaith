@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Carfaith.Dominio.Modelo.Entidades;
 
@@ -27,7 +28,8 @@ public partial class Proveedores
 
     public bool? Estado { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<OrdenDeCompra> OrdenDeCompras { get; set; } = new List<OrdenDeCompra>();
-
+    [JsonIgnore]
     public virtual ICollection<ProductoProveedor> ProductoProveedors { get; set; } = new List<ProductoProveedor>();
 }
