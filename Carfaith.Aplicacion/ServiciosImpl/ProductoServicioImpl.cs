@@ -35,11 +35,46 @@ namespace Carfaith.Aplicacion.ServiciosImpl
             {
                 throw new ArgumentException("La línea de producto no puede ser nula.", nameof(producto));
             }
+
+            if (string.IsNullOrEmpty(producto.CodigoProducto))
+            {
+                producto.CodigoProducto = await GenerarCodigoProductoAsync();
+            }
+
+
             if (!string.IsNullOrEmpty(producto.CodigoProducto) && !await _productoRepositorio.IsCodigoProductoUnique(producto.CodigoProducto))
             {
                 throw new ArgumentException($"El código de producto {producto.CodigoProducto} ya se encuentra registrado", nameof(producto));
             }
             await _productoRepositorio.AddAsync(producto);
+        }
+        private async Task<string> GenerarCodigoProductoAsync()
+        {
+            // Obtener todos los productos para encontrar el último código
+            var productos = await _productoRepositorio.GetAllAsync();
+
+            // Filtrar solo los códigos con formato PROD-XXXX
+            var codigosExistentes = productos
+                .Where(p => p.CodigoProducto != null && p.CodigoProducto.StartsWith("PROD-"))
+                .Select(p => p.CodigoProducto)
+                .ToList();
+
+            // Encontrar el número más alto actual
+            int maxNumero = 0;
+            foreach (var codigo in codigosExistentes)
+            {
+                if (int.TryParse(codigo.Substring(5), out int numero))
+                {
+                    if (numero > maxNumero)
+                        maxNumero = numero;
+                }
+            }
+
+            // Generar el siguiente número
+            int siguienteNumero = maxNumero + 1;
+
+            // Formatear el nuevo código con ceros a la izquierda (PROD-0001)
+            return $"PROD-{siguienteNumero:D4}";
         }
 
         public async Task DeleteProductoByIdAsync(int id)
