@@ -53,6 +53,7 @@ namespace Carfaith_API.Controllers
             }
         }
 
+
         [HttpGet("ListarDetalleProductoProveedor")]
         public async Task<IActionResult> ListarDetalleProductoProveedor()
         {
@@ -67,6 +68,23 @@ namespace Carfaith_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Error al listar detalles de ProductoProveedor." });
             }
         }
+
+        [HttpPut("ActualizarProductoProveedor")]
+        public async Task<IActionResult> ActualizarProductoProveedor([FromBody] ProductoProveedor productoProveedor)
+        {
+            try
+            {
+                await _productoProveedorServicio.UpdateProductoProveedorAsync(productoProveedor);
+                return Ok(new { message = "ProductoProveedor actualizado correctamente." });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al actualizar ProductoProveedor: " + ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new { message = "Error al actualizar ProductoProveedor: " + ex.Message });
+            }
+        }
+
 
         [HttpDelete("EliminarProductoProveedor/{id}")]
         public async Task<IActionResult> EliminarProductoProveedor(int id)

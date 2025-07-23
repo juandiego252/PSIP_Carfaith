@@ -64,7 +64,27 @@ namespace Carfaith.Aplicacion.ServiciosImpl
 
         public async Task UpdateProductoProveedorAsync(ProductoProveedor productoProveedor)
         {
-            await _productoProveedorRepositorio.UpdateAsync(productoProveedor);
+            try
+            {
+                // Obtener la entidad original de la base de datos
+                var entidadOriginal = await _productoProveedorRepositorio.GetByIdAsync(productoProveedor.IdProductoProveedor);
+
+                if (entidadOriginal == null)
+                {
+                    throw new Exception($"No se encontró el ProductoProveedor con ID {productoProveedor.IdProductoProveedor}");
+                }
+
+                // Actualizar solo las propiedades necesarias
+                entidadOriginal.IdProducto = productoProveedor.IdProducto;
+                entidadOriginal.IdProveedor = productoProveedor.IdProveedor;
+
+                // Guardar los cambios
+                await _productoProveedorRepositorio.UpdateAsync(entidadOriginal);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al actualizar ProductoProveedor: {ex.Message}", ex);
+            }
         }
 
         // Consultas
