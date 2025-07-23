@@ -1,4 +1,5 @@
-﻿using Carfaith.Aplicacion.Servicios;
+﻿using Carfaith.Aplicacion.DTO.DTOs;
+using Carfaith.Aplicacion.Servicios;
 using Carfaith.Dominio.Modelo.Entidades;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,26 @@ namespace Carfaith_API.Controllers
                 Console.WriteLine("Error al asociar" + ex.ToString());
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Error al asociar ProductoProveedor." });
 
+            }
+        }
+        [HttpPost("AsociarMasivaProductoProveedores")]
+        public async Task<IActionResult> AsociarProductoConProveedores([FromBody] AsociacionMasivaDTO asociacionDTO)
+        {
+            try
+            {
+                var productosProveedores = await _productoProveedorServicio.AsociarProductoConProveedoresAsync(asociacionDTO);
+
+                return Ok(new
+                {
+                    message = "Proveedores asociados correctamente al producto.",
+                    totalAsociados = productosProveedores.Count
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al asociar proveedores al producto: " + ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new { message = "Error al asociar proveedores al producto: " + ex.Message });
             }
         }
 

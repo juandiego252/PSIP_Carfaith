@@ -102,5 +102,40 @@ namespace Carfaith.Aplicacion.ServiciosImpl
         {
             return await _productoProveedorRepositorio.GetProductosProveedoresPorPaisAsync(paisOrigen);
         }
+
+        public async Task<List<ProductoProveedor>> AsociarProductoConProveedoresAsync(AsociacionMasivaDTO asociacionMasivaDTO)
+        {
+            if (asociacionMasivaDTO == null)
+            {
+                throw new ArgumentNullException(nameof(asociacionMasivaDTO), "El DTO de asociación masiva no puede ser nulo.");
+            }
+            if (asociacionMasivaDTO.IdsProveedores == null || !asociacionMasivaDTO.IdsProveedores.Any())
+            {
+                throw new ArgumentException("La lista de IDs de proveedores no puede estar vacía.", nameof(asociacionMasivaDTO));
+            }
+            if (asociacionMasivaDTO.IdProducto <= 0)
+            {
+                throw new ArgumentException("El ID del producto no es valido.", nameof(asociacionMasivaDTO));
+            }
+
+            List<ProductoProveedor> productoProveedoresCreados = new List<ProductoProveedor>();
+            foreach (var idProveedor in asociacionMasivaDTO.IdsProveedores)
+            {
+                var productoProveedorExist = await _productoProveedorRepositorio.ProductoProveedorExist(asociacionMasivaDTO.IdProducto, idProveedor);
+                if (!productoProveedorExist)
+                {
+                    var productoProveedor = new ProductoProveedor
+                    {
+                        IdProducto = asociacionMasivaDTO.IdProducto,
+                        IdProveedor = idProveedor
+                    };
+
+                    await _productoProveedorRepositorio.AddAsync(productoProveedor);
+                    productoProveedoresCreados.Add(productoProveedor);
+                }
+            }
+
+            return productoProveedoresCreados;
+        }
     }
 }
