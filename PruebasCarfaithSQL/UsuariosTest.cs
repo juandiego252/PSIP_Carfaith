@@ -11,7 +11,7 @@ namespace PruebasCarfaithSQL
         private CarfaithDbContext _context;
         private IUsuariosServicio _usuariosServicio;
         //private const string CONNECTION_STRING = "Server=DESKTOP-REELKQG\\SQLEXPRESS;Database=carfaith;User=sa;Password=123456;TrustServerCertificate=True;";
-        private const string CONNECTION_STRING = "Server=tcp:psip-carfaith-sql-server.database.windows.net,1433;Initial Catalog=carfaith-db;Persist Security Info=False;User ID=psip-ad;Password=Jdpachon123456;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        private const string CONNECTION_STRING = "Server=tcp:psip-carfaith-sql-server.database.windows.net,1433;Initial Catalog=psipdbcarfaith;Persist Security Info=False;User ID=psip-ad;Password=Jdpachon123456;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         [SetUp]
         public void Setup()
@@ -29,9 +29,9 @@ namespace PruebasCarfaithSQL
         {
             var usuario = new Usuarios
             {
-                NombreCompleto = "Bryan Cabrera",
-                Email = "bryanc@google.com",
-                Contraseña = "admin123",
+                NombreCompleto = "",
+                Email = "",
+                Contraseña = "",
             };
             await _usuariosServicio.AddUsuariosAsync(usuario);
             Assert.Pass("Usuario creado exitosamente");
