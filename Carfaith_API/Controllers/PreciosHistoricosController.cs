@@ -39,10 +39,7 @@ namespace Carfaith_API.Controllers
             try
             {
                 var PreciosHistoricosList = await _preciosHistoricosServicio.GetByIdPreciosHistoricosAsync(id);
-                if (PreciosHistoricosList == null)
-                {
-                    return NotFound(new { message = "No se encontraron registros de precios historicos." });
-                }
+
                 return Ok(PreciosHistoricosList);
             }
             catch (Exception ex)
@@ -57,10 +54,6 @@ namespace Carfaith_API.Controllers
             try
             {
                 var PreciosHistoricosList = await _preciosHistoricosServicio.GetAllPreciosHistoricosAsync();
-                if (PreciosHistoricosList == null || !PreciosHistoricosList.Any())
-                {
-                    return NotFound(new { message = "No se encontraron precios historicos." });
-                }
                 return Ok(PreciosHistoricosList);
             }
             catch (Exception ex)
