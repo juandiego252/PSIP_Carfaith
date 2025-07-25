@@ -62,6 +62,8 @@ builder.Services.AddScoped<ITransferenciaStockServicio, TransferenciaStockServic
 builder.Services.AddScoped<IOrdenEgresoServicio, OrdenEgresoServicioImpl>();
 builder.Services.AddScoped<IOrdenEgresoStockServicio, OrdenEgresoStockServicioImpl>();
 builder.Services.AddScoped<IDetalleOrdenEgresoServicio, DetalleOrdenEgresoServicioImpl>();
+builder.Services.AddScoped<IDetalleOrdenIngresoServicio, DetalleOrdenIngresoServicioImpl>();
+builder.Services.AddScoped<IOrdenIngresoStockServicio, OrdenIngresoStockServicioImpl>();
 
 // Configuracion de CORS
 builder.Services.AddCors(options =>

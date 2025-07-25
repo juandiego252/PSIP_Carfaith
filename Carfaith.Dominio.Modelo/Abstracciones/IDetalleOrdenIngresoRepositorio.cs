@@ -9,5 +9,6 @@ namespace Carfaith.Dominio.Modelo.Abstracciones
 {
     public interface IDetalleOrdenIngresoRepositorio : IRepositorio<DetalleOrdenIngreso>
     {
+
     }
 }
