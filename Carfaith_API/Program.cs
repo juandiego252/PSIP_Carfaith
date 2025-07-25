@@ -59,6 +59,7 @@ builder.Services.AddScoped<IStockServicio, StockServicioImpl>();
 builder.Services.AddScoped<ITransferenciasServicio, TransferenciasServicioImpl>();
 builder.Services.AddScoped<IDetalleTransferenciaServicio, DetalleTransferenciaServicioImpl>();
 builder.Services.AddScoped<ITransferenciaStockServicio, TransferenciaStockServicioImpl>();
+builder.Services.AddScoped<IPreciosHistoricosServicio, PreciosHistoricosServicioImpl>();
 builder.Services.AddScoped<IOrdenEgresoServicio, OrdenEgresoServicioImpl>();
 builder.Services.AddScoped<IOrdenEgresoStockServicio, OrdenEgresoStockServicioImpl>();
 builder.Services.AddScoped<IDetalleOrdenEgresoServicio, DetalleOrdenEgresoServicioImpl>();

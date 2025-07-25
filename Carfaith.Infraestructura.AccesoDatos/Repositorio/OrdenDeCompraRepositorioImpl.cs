@@ -45,5 +45,21 @@ namespace Carfaith.Infraestructura.AccesoDatos.Repositorio
                 throw new Exception("Error: No se pudieron obtener las ordenes de compra, " + ex.Message);
             }
         }
+
+        public async Task<bool> IsCodigoOrdenUnique(string codigoOrden)
+        {
+            try
+            {
+                var codigoOrdenExists = from oc in _context.OrdenDeCompras
+                                        where oc.NumeroOrden == codigoOrden
+                                        select oc;
+
+                return await codigoOrdenExists.AnyAsync() == false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al verificar la unicidad del número de orden de la Orden de Compra: " + ex.Message);
+            }
+        }
     }
 }

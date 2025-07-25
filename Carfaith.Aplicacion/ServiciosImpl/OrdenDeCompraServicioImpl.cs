@@ -22,7 +22,56 @@ namespace Carfaith.Aplicacion.ServiciosImpl
         }
         public async Task AddOrdenDeCompraAsync(OrdenDeCompra ordenDeCompra)
         {
+            if (ordenDeCompra == null)
+            {
+                throw new ArgumentNullException(nameof(ordenDeCompra), "La orden de compra no puede estar vacia.");
+            }
+            if (ordenDeCompra.IdProveedor == null)
+            {
+                throw new ArgumentException("En proveedor no puede estar vacio.", nameof(ordenDeCompra));
+            }
+
+            if (string.IsNullOrEmpty(ordenDeCompra.NumeroOrden))
+            {
+                ordenDeCompra.NumeroOrden = await GenerarNumeroOrdenAsync();
+            }
+
+
+            if (!string.IsNullOrEmpty(ordenDeCompra.NumeroOrden) && !await _ordenDeCompraRepositorio.IsCodigoOrdenUnique(ordenDeCompra.NumeroOrden))
+            {
+                throw new ArgumentException($"El número de orden {ordenDeCompra.NumeroOrden} ya se encuentra registrado", nameof(ordenDeCompra));
+            }
+
             await _ordenDeCompraRepositorio.AddAsync(ordenDeCompra);
+        }
+
+        private async Task<string> GenerarNumeroOrdenAsync()
+        {
+            // Obtener todos los productos para encontrar el último código
+            var ordenesCompra = await _ordenDeCompraRepositorio.GetAllAsync();
+
+            // Filtrar solo los códigos con formato PROD-XXXX
+            var codigosExistentes = ordenesCompra
+                .Where(od => od.NumeroOrden != null && od.NumeroOrden.StartsWith("ORDN-"))
+                .Select(od => od.NumeroOrden)
+                .ToList();
+
+            // Encontrar el número más alto actual
+            int maxNumero = 0;
+            foreach (var codigo in codigosExistentes)
+            {
+                if (int.TryParse(codigo.Substring(5), out int numero))
+                {
+                    if (numero > maxNumero)
+                        maxNumero = numero;
+                }
+            }
+
+            // Generar el siguiente número
+            int siguienteNumero = maxNumero + 1;
+
+            // Formatear el nuevo código con ceros a la izquierda (PROD-0001)
+            return $"ORDN-{siguienteNumero:D4}";
         }
 
         public async Task DeleteOrdenDeCompraByIdAsync(int id)

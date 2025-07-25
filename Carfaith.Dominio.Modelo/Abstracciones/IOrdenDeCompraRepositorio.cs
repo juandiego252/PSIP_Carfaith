@@ -10,6 +10,8 @@ namespace Carfaith.Dominio.Modelo.Abstracciones
 {
     public interface IOrdenDeCompraRepositorio : IRepositorio<OrdenDeCompra>
     {
+        Task<bool> IsCodigoOrdenUnique(string codigoOrden);
+
         public Task<List<OrdenDeCompraInfoDTO>> GetOrdenesDeCompraProveedor();
     }
 }
