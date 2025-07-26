@@ -53,7 +53,7 @@ namespace Carfaith_API.Controllers
         {
             try
             {
-                var PreciosHistoricosList = await _preciosHistoricosServicio.GetAllPreciosHistoricosAsync();
+                var PreciosHistoricosList = await _preciosHistoricosServicio.GetPreciosHistoricosProductoAsync();
                 return Ok(PreciosHistoricosList);
             }
             catch (Exception ex)

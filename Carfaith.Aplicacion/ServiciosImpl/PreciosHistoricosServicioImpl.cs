@@ -1,4 +1,5 @@
-﻿using Carfaith.Aplicacion.Servicios;
+﻿using Carfaith.Aplicacion.DTO;
+using Carfaith.Aplicacion.Servicios;
 using Carfaith.Dominio.Modelo.Abstracciones;
 using Carfaith.Dominio.Modelo.Entidades;
 using Carfaith.Infraestructura.AccesoDatos.EFCore;
@@ -38,6 +39,11 @@ namespace Carfaith.Aplicacion.ServiciosImpl
         public async Task<PreciosHistoricos> GetByIdPreciosHistoricosAsync(int id)
         {
             return await _preciosHistoricosRepositorio.GetByIdAsync(id);
+        }
+
+        public async Task<IEnumerable<PreciosHistoricosDTO>> GetPreciosHistoricosProductoAsync()
+        {
+            return await _preciosHistoricosRepositorio.GetPreciosHistoricosProductos();
         }
 
         public async Task UpdatePreciosHistoricosAsync(PreciosHistoricos preciosHistoricos)

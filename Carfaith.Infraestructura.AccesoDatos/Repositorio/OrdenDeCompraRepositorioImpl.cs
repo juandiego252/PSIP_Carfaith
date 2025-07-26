@@ -14,6 +14,7 @@ namespace Carfaith.Infraestructura.AccesoDatos.Repositorio
     public class OrdenDeCompraRepositorioImpl : RepositorioImpl<OrdenDeCompra>, IOrdenDeCompraRepositorio
     {
         private readonly CarfaithDbContext _context;
+
         public OrdenDeCompraRepositorioImpl(CarfaithDbContext context) : base(context)
         {
             _context = context;
