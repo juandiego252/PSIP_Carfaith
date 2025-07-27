@@ -1,4 +1,5 @@
-﻿using Carfaith.Dominio.Modelo.Entidades;
+﻿using Carfaith.Aplicacion.DTO;
+using Carfaith.Dominio.Modelo.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,5 +26,8 @@ namespace Carfaith.Aplicacion.Servicios
 
         [OperationContract]
         Task DeletePreciosHistoricosByIdAsync(int id);
+
+        [OperationContract]
+        Task <IEnumerable<PreciosHistoricosDTO>> GetPreciosHistoricosProductoAsync();
     }
 }
