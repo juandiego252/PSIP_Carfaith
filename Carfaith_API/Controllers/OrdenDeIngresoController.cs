@@ -31,5 +31,52 @@ namespace Carfaith_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Error interno del servidor." });
             }
         }
+
+        [HttpPut("EditarOrdenIngresoConDetalles")]
+        public async Task<IActionResult> EditarOrdenIngresoConDetalles([FromBody] OrdenIngresoConDetallesDTO ordenIngresoConDetallesDTO)
+        {
+            try
+            {
+                await _ordenIngresoStockServicio.EditarOrdenIngresoConDetalles(ordenIngresoConDetallesDTO);
+                return Ok(new { message = "Orden de ingreso editada exitosamente." });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error interno" + ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Error interno del servidor." });
+            }
+        }
+
+
+        [HttpGet("ListarOrdenesIngresoConDetalles")]
+        public async Task<IActionResult> ListarOrdenesIngresoConDetalles()
+        {
+            try
+            {
+                var ordenes = await _ordenIngresoStockServicio.GetOrdenIngresoConDetalles();
+                return Ok(ordenes);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error interno" + ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Error interno del servidor." });
+            }
+        }
+
+        [HttpDelete("EliminarOrdenIngresoConDetalles/{id}")]
+        public async Task<IActionResult> EliminarOrdenIngresoConDetalles(int id)
+        {
+            try
+            {
+                await _ordenIngresoStockServicio.EliminarOrdenIngresoConDetalles(id);
+                return Ok(new { message = "Orden de ingreso eliminada exitosamente." });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error interno" + ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Error interno del servidor." });
+            }
+
+        }
     }
 }

@@ -216,6 +216,12 @@ public partial class CarfaithDbContext : DbContext
                 .HasConstraintName("FK__Orden_de___Id_or__6EF57B66");
         });
 
+        modelBuilder.Entity<OrdenDeIngreso>()
+       .HasMany(o => o.DetalleOrdenIngresos)
+       .WithOne(d => d.OrdenIngreso)
+       .HasForeignKey(d => d.OrdenIngresoId)
+       .OnDelete(DeleteBehavior.Cascade);
+
         modelBuilder.Entity<OrdenEgreso>(entity =>
         {
             entity.HasKey(e => e.IdOrdenEgreso).HasName("PK__Orden_eg__21C30FEBA07A17C6");
