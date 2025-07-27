@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Carfaith.Aplicacion.DTO.DTOs.Proveedor;
 using Carfaith.Aplicacion.Servicios;
 using Carfaith.Dominio.Modelo.Abstracciones;
 using Carfaith.Dominio.Modelo.Entidades;
@@ -60,7 +61,23 @@ namespace Carfaith.Aplicacion.ServiciosImpl
 
         public async Task UpdateProveedoresAsync(Proveedores proveedores)
         {
-            await _proveedoresRepositorio.UpdateAsync(proveedores);
+            var existeProveedor = await _proveedoresRepositorio.GetByIdAsync(proveedores.IdProveedor);
+            if (existeProveedor == null)
+            {
+                throw new ArgumentException("El proveedor no existe.");
+            }
+            // Mapear propiedades actualizadas
+            existeProveedor.NombreProveedor = proveedores.NombreProveedor;
+            existeProveedor.PaisOrigen = proveedores.PaisOrigen;
+            existeProveedor.TipoProveedor = proveedores.TipoProveedor;
+            existeProveedor.Telefono = proveedores.Telefono;
+            existeProveedor.Email = proveedores.Email;
+            existeProveedor.PersonaContacto = proveedores.PersonaContacto;
+            existeProveedor.FechaRegistro = proveedores.FechaRegistro;
+            existeProveedor.Ruc = proveedores.Ruc;
+            existeProveedor.Direccion = proveedores.Direccion;
+            existeProveedor.Estado = proveedores.Estado;
+            await _proveedoresRepositorio.UpdateAsync(existeProveedor);
         }
 
         // Consultas
@@ -88,6 +105,11 @@ namespace Carfaith.Aplicacion.ServiciosImpl
             {
                 throw new ArgumentException("Proveedor no valido. Debe ser local, nacional o internacional.");
             }
+        }
+
+        public async Task<IEnumerable<ProveedorDetalleDTO>> GetProveedoresConDetallesAsync()
+        {
+            return await _proveedoresRepositorio.GetProveedoresConDetallesAsync();
         }
     }
 }

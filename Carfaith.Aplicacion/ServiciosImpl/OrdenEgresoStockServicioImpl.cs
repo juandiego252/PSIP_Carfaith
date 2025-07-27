@@ -11,6 +11,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using Carfaith.Aplicacion.DTO.DTOs.DetalleOrdenEgreso;
+using Carfaith.Aplicacion.Servicios;
+using Carfaith.Dominio.Modelo.Entidades;
+using Carfaith.Infraestructura.AccesoDatos.EFCore;
 
 namespace Carfaith.Aplicacion.ServiciosImpl
 {

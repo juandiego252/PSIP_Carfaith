@@ -6,6 +6,7 @@ namespace Carfaith.Dominio.Modelo.Entidades;
 
 public partial class Producto
 {
+    
     public int IdProducto { get; set; }
 
     public string? CodigoProducto { get; set; }
@@ -13,6 +14,8 @@ public partial class Producto
     public string? Nombre { get; set; }
 
     public int? LineaDeProducto { get; set; }
+
+    public bool? GestionaLote { get; set; }
 
     [JsonIgnore]
     public virtual LineasDeProducto? LineaDeProductoNavigation { get; set; }

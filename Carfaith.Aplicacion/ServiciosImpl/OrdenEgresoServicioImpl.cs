@@ -41,7 +41,6 @@ namespace Carfaith.Aplicacion.ServiciosImpl
 
         public async Task UpdateOrdenEgresoAsync(OrdenEgreso ordenEgreso)
         {
-            await _ordenEgresoRepositorio.UpdateAsync(ordenEgreso);
             var existeOrdenEgreso = await _ordenEgresoRepositorio.GetByIdAsync(ordenEgreso.IdOrdenEgreso);
 
             if (existeOrdenEgreso != null)

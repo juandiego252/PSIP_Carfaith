@@ -9,8 +9,9 @@ namespace Carfaith.Aplicacion.DTO.DTOs
     public class ProductoResumenDTO
     {
         public int IdProducto { get; set; }
-        public string Nombre { get; set; }
         public string CodigoProducto { get; set; }
-        public string LineaProducto { get; set; }
+        public string NombreProducto { get; set; }
+        public int IdLineaProdcuto { get; set; }
+        public string NombreLineaProducto { get; set; }
     }
 }

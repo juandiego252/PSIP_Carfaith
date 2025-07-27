@@ -52,6 +52,30 @@ builder.Services.AddScoped<IProveedoresServicio, ProveedoresServicioImpl>();
 builder.Services.AddScoped<ILineasDeProductoServicio, LineasDeProductoServicioImpl>();
 builder.Services.AddScoped<IOrdenDeCompraServicio, OrdenDeCompraServicioImpl>();
 builder.Services.AddScoped<IUsuariosServicio, UsuariosServicioImpl>();
+builder.Services.AddScoped<IProductoProveedorServicio, ProductoProveedorServicioImpl>();
+builder.Services.AddScoped<IOrdenDeIngresoServicio, OrdenDeIngresoServicioImpl>();
+builder.Services.AddScoped<IUbicacionesServicio, UbicacionesServicioImpl>();
+builder.Services.AddScoped<IStockServicio, StockServicioImpl>();
+builder.Services.AddScoped<ITransferenciasServicio, TransferenciasServicioImpl>();
+builder.Services.AddScoped<IDetalleTransferenciaServicio, DetalleTransferenciaServicioImpl>();
+builder.Services.AddScoped<ITransferenciaStockServicio, TransferenciaStockServicioImpl>();
+builder.Services.AddScoped<IPreciosHistoricosServicio, PreciosHistoricosServicioImpl>();
+builder.Services.AddScoped<IOrdenEgresoServicio, OrdenEgresoServicioImpl>();
+builder.Services.AddScoped<IOrdenEgresoStockServicio, OrdenEgresoStockServicioImpl>();
+builder.Services.AddScoped<IDetalleOrdenEgresoServicio, DetalleOrdenEgresoServicioImpl>();
+builder.Services.AddScoped<IDetalleOrdenIngresoServicio, DetalleOrdenIngresoServicioImpl>();
+builder.Services.AddScoped<IOrdenIngresoStockServicio, OrdenIngresoStockServicioImpl>();
+
+// Configuracion de CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("NewPolicy", app =>
+    {
+        app.AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
 
 // Configuracion de autenticacion
 builder.Services.AddAuthentication("BasicAuthentication")
@@ -66,6 +90,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("NewPolicy");
 
 app.UseAuthentication();
 

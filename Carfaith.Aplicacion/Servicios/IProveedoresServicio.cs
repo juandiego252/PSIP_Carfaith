@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using Carfaith.Aplicacion.DTO.DTOs.Proveedor;
 using Carfaith.Dominio.Modelo.Entidades;
 
 namespace Carfaith.Aplicacion.Servicios
@@ -32,5 +33,8 @@ namespace Carfaith.Aplicacion.Servicios
         Task<IEnumerable<Proveedores>> GetProveedoresPorTipoProveedor(string tipoProveedor);
         [OperationContract]
         Task<IEnumerable<Proveedores>> GetProveedoresPorPais(string paisOrigen);
+
+        [OperationContract]
+        Task<IEnumerable<ProveedorDetalleDTO>> GetProveedoresConDetallesAsync();
     }
 }

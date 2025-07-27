@@ -34,6 +34,9 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
                     b.Property<int?>("Cantidad")
                         .HasColumnType("int");
 
+                    b.Property<int?>("IdLoteProducto")
+                        .HasColumnType("int");
+
                     b.Property<int?>("IdOrden")
                         .HasColumnType("int")
                         .HasColumnName("Id_orden");
@@ -41,6 +44,9 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
                     b.Property<int?>("IdProductoProveedor")
                         .HasColumnType("int")
                         .HasColumnName("Id_producto_proveedor");
+
+                    b.Property<int?>("LoteProductoId")
+                        .HasColumnType("int");
 
                     b.Property<decimal?>("PrecioUnitario")
                         .HasColumnType("decimal(18, 0)")
@@ -52,6 +58,8 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
                     b.HasIndex("IdOrden");
 
                     b.HasIndex("IdProductoProveedor");
+
+                    b.HasIndex("LoteProductoId");
 
                     b.ToTable("Detalle_orden_compra", (string)null);
                 });
@@ -68,9 +76,15 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
                     b.Property<int?>("Cantidad")
                         .HasColumnType("int");
 
+                    b.Property<int?>("IdLoteProducto")
+                        .HasColumnType("int");
+
                     b.Property<int?>("IdProductoProveedor")
                         .HasColumnType("int")
                         .HasColumnName("Id_producto_proveedor");
+
+                    b.Property<int?>("LoteProductoId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("OrdenEgresoId")
                         .HasColumnType("int")
@@ -87,6 +101,8 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
                         .HasName("PK__Detalle___6B21310D7218CD36");
 
                     b.HasIndex("IdProductoProveedor");
+
+                    b.HasIndex("LoteProductoId");
 
                     b.HasIndex("OrdenEgresoId");
 
@@ -107,9 +123,15 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
                     b.Property<int?>("Cantidad")
                         .HasColumnType("int");
 
+                    b.Property<int?>("IdLoteProducto")
+                        .HasColumnType("int");
+
                     b.Property<int?>("IdProductoProveedor")
                         .HasColumnType("int")
                         .HasColumnName("Id_producto_proveedor");
+
+                    b.Property<int?>("LoteProductoId")
+                        .HasColumnType("int");
 
                     b.Property<string>("NumeroLote")
                         .HasMaxLength(255)
@@ -139,6 +161,8 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
 
                     b.HasIndex("IdProductoProveedor");
 
+                    b.HasIndex("LoteProductoId");
+
                     b.HasIndex("OrdenIngresoId");
 
                     b.HasIndex("UbicacionId");
@@ -158,6 +182,9 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
                     b.Property<int?>("Cantidad")
                         .HasColumnType("int");
 
+                    b.Property<int?>("IdLoteProducto")
+                        .HasColumnType("int");
+
                     b.Property<int?>("IdProductoProveedor")
                         .HasColumnType("int")
                         .HasColumnName("Id_producto_proveedor");
@@ -166,12 +193,17 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
                         .HasColumnType("int")
                         .HasColumnName("Id_transferencia");
 
+                    b.Property<int?>("LoteProductoId")
+                        .HasColumnType("int");
+
                     b.HasKey("IdDetalleTransferencia")
                         .HasName("PK__Detalle___595FCCF0C909F886");
 
                     b.HasIndex("IdProductoProveedor");
 
                     b.HasIndex("IdTransferencia");
+
+                    b.HasIndex("LoteProductoId");
 
                     b.ToTable("Detalle_transferencia", (string)null);
                 });
@@ -199,6 +231,44 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
                         .HasName("PK__Lineas_d__CF744F1B011B9CEA");
 
                     b.ToTable("Lineas_de_Producto", (string)null);
+                });
+
+            modelBuilder.Entity("Carfaith.Dominio.Modelo.Entidades.LoteProducto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CantidadActual")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CodigoLote")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("FechaIngreso")
+                        .HasColumnType("date");
+
+                    b.Property<DateOnly?>("FechaVencimiento")
+                        .HasColumnType("date");
+
+                    b.Property<int>("IdProducto")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductoNavigationIdProducto")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductoNavigationIdProducto");
+
+                    b.ToTable("LoteProducto");
                 });
 
             modelBuilder.Entity("Carfaith.Dominio.Modelo.Entidades.OrdenDeCompra", b =>
@@ -356,6 +426,9 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)")
                         .HasColumnName("Codigo_producto");
+
+                    b.Property<bool?>("GestionaLote")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("LineaDeProducto")
                         .HasColumnType("int")
@@ -589,9 +662,15 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
                         .HasForeignKey("IdProductoProveedor")
                         .HasConstraintName("FK__Detalle_o__Id_pr__6E01572D");
 
+                    b.HasOne("Carfaith.Dominio.Modelo.Entidades.LoteProducto", "LoteProducto")
+                        .WithMany("DetalleOrdenCompra")
+                        .HasForeignKey("LoteProductoId");
+
                     b.Navigation("IdOrdenNavigation");
 
                     b.Navigation("IdProductoProveedorNavigation");
+
+                    b.Navigation("LoteProducto");
                 });
 
             modelBuilder.Entity("Carfaith.Dominio.Modelo.Entidades.DetalleOrdenEgreso", b =>
@@ -600,6 +679,10 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
                         .WithMany("DetalleOrdenEgresos")
                         .HasForeignKey("IdProductoProveedor")
                         .HasConstraintName("FK__Detalle_o__Id_pr__73BA3083");
+
+                    b.HasOne("Carfaith.Dominio.Modelo.Entidades.LoteProducto", "LoteProducto")
+                        .WithMany("DetalleOrdenEgreso")
+                        .HasForeignKey("LoteProductoId");
 
                     b.HasOne("Carfaith.Dominio.Modelo.Entidades.OrdenEgreso", "OrdenEgreso")
                         .WithMany("DetalleOrdenEgresos")
@@ -613,6 +696,8 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
 
                     b.Navigation("IdProductoProveedorNavigation");
 
+                    b.Navigation("LoteProducto");
+
                     b.Navigation("OrdenEgreso");
 
                     b.Navigation("Ubicacion");
@@ -624,6 +709,10 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
                         .WithMany("DetalleOrdenIngresos")
                         .HasForeignKey("IdProductoProveedor")
                         .HasConstraintName("FK__Detalle_o__Id_pr__70DDC3D8");
+
+                    b.HasOne("Carfaith.Dominio.Modelo.Entidades.LoteProducto", "LoteProducto")
+                        .WithMany("DetalleOrdenIngreso")
+                        .HasForeignKey("LoteProductoId");
 
                     b.HasOne("Carfaith.Dominio.Modelo.Entidades.OrdenDeIngreso", "OrdenIngreso")
                         .WithMany("DetalleOrdenIngresos")
@@ -637,6 +726,8 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
                         .HasConstraintName("FK__Detalle_o__Ubica__71D1E811");
 
                     b.Navigation("IdProductoProveedorNavigation");
+
+                    b.Navigation("LoteProducto");
 
                     b.Navigation("OrdenIngreso");
 
@@ -655,9 +746,24 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
                         .HasForeignKey("IdTransferencia")
                         .HasConstraintName("FK__Detalle_t__Id_tr__797309D9");
 
+                    b.HasOne("Carfaith.Dominio.Modelo.Entidades.LoteProducto", "LoteProducto")
+                        .WithMany("DetalleTransferencia")
+                        .HasForeignKey("LoteProductoId");
+
                     b.Navigation("IdProductoProveedorNavigation");
 
                     b.Navigation("IdTransferenciaNavigation");
+
+                    b.Navigation("LoteProducto");
+                });
+
+            modelBuilder.Entity("Carfaith.Dominio.Modelo.Entidades.LoteProducto", b =>
+                {
+                    b.HasOne("Carfaith.Dominio.Modelo.Entidades.Producto", "ProductoNavigation")
+                        .WithMany()
+                        .HasForeignKey("ProductoNavigationIdProducto");
+
+                    b.Navigation("ProductoNavigation");
                 });
 
             modelBuilder.Entity("Carfaith.Dominio.Modelo.Entidades.OrdenDeCompra", b =>
@@ -754,6 +860,17 @@ namespace Carfaith.Infraestructura.AccesoDatos.Migrations
             modelBuilder.Entity("Carfaith.Dominio.Modelo.Entidades.LineasDeProducto", b =>
                 {
                     b.Navigation("Productos");
+                });
+
+            modelBuilder.Entity("Carfaith.Dominio.Modelo.Entidades.LoteProducto", b =>
+                {
+                    b.Navigation("DetalleOrdenCompra");
+
+                    b.Navigation("DetalleOrdenEgreso");
+
+                    b.Navigation("DetalleOrdenIngreso");
+
+                    b.Navigation("DetalleTransferencia");
                 });
 
             modelBuilder.Entity("Carfaith.Dominio.Modelo.Entidades.OrdenDeCompra", b =>

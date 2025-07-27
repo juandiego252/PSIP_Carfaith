@@ -124,9 +124,9 @@ namespace Carfaith.Infraestructura.AccesoDatos.Repositorio
                                          select new ProductoResumenDTO
                                          {
                                              IdProducto = producto.IdProducto,
-                                             Nombre = producto.Nombre!,
+                                             NombreProducto = producto.Nombre,
                                              CodigoProducto = producto.CodigoProducto!,
-                                             LineaProducto = lineasProducto.Nombre!,
+                                             NombreLineaProducto = lineasProducto.Nombre!,
                                          }).ToList()
                         };
 
@@ -182,6 +182,11 @@ namespace Carfaith.Infraestructura.AccesoDatos.Repositorio
                         };
 
             return await query.ToListAsync();
+        }
+
+        public async Task<bool> ProductoProveedorExist(int? idProducto, int? idProveedor)
+        {
+            return await _context.ProductoProveedors.AnyAsync(pp => pp.IdProducto == idProducto && pp.IdProveedor == idProveedor);
         }
     }
 }

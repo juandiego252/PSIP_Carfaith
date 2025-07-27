@@ -8,11 +8,11 @@ namespace Carfaith_API.Controllers
     [ApiController]
     [Route("api/[Controller]")]
     [Authorize]
-    public class ProductoControlador : ControllerBase
+    public class ProductoController : ControllerBase
     {
         private IProductoServicio _productoServicio;
 
-        public ProductoControlador(IProductoServicio productoServicio)
+        public ProductoController(IProductoServicio productoServicio)
         {
             _productoServicio = productoServicio;
         }
@@ -38,7 +38,7 @@ namespace Carfaith_API.Controllers
         {
             try
             {
-                var productos = await _productoServicio.GetAllProductoAsync();
+                var productos = await _productoServicio.GetProductosResumen();
                 return Ok(productos);
             }
             catch (Exception ex)

@@ -51,6 +51,23 @@ namespace Carfaith_API.Controllers
             }
         }
 
+        [HttpGet("ListarProveedoresDetalles")]
+        public async Task<IActionResult> GetProveedoresDetalles()
+        {
+            try
+            {
+                var proveedores = await _proveedorServicio.GetProveedoresConDetallesAsync();
+
+                return Ok(proveedores);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Se produjo un error: " + ex.ToString());
+
+                return StatusCode(500, "Error Interno");
+            }
+        }
+
         [HttpGet("ListarProveedores/{id}")]
         public async Task<IActionResult> GetProveedoresById(int id)
         {

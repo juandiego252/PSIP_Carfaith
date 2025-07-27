@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using Carfaith.Aplicacion.DTO.DTOs.OrdenDeCompra;
 using Carfaith.Dominio.Modelo.Entidades;
 
 namespace Carfaith.Aplicacion.Servicios
@@ -18,7 +19,7 @@ namespace Carfaith.Aplicacion.Servicios
         [OperationContract]
         Task<OrdenDeCompra> GetByIdOrdenDeCompraAsync(int id);
         [OperationContract]
-        Task<IEnumerable<OrdenDeCompra>> GetAllOrdenDeCompraAsync();
+        Task<IEnumerable<OrdenDeCompraInfoDTO>> GetAllOrdenDeCompraAsync();
         [OperationContract]
         Task DeleteOrdenDeCompraByIdAsync(int id);
     }
