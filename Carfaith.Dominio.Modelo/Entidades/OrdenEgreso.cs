@@ -7,8 +7,6 @@ public partial class OrdenEgreso
 {
     public int IdOrdenEgreso { get; set; }
 
-    public string? TipoEgreso { get; set; }
-
     public DateOnly? Fecha { get; set; }
 
     public string? Destino { get; set; }

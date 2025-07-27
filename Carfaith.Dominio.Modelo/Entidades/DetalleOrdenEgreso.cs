@@ -13,6 +13,8 @@ public partial class DetalleOrdenEgreso
 
     public int? Cantidad { get; set; }
 
+    public string? TipoEgreso { get; set; }
+
     public int? UbicacionId { get; set; }
 
     public virtual ProductoProveedor? IdProductoProveedorNavigation { get; set; }
