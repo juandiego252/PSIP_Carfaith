@@ -14,8 +14,11 @@ namespace Carfaith.Aplicacion.Servicios
         [OperationContract]
         Task AddDetalleOrdenEgreso(DetalleOrdenEgreso detalleOrdenEgreso);
 
+        /* [OperationContract]
+        Task<List<DetalleOrdenEgreso>> GetDetallesOrdenEgresoByOrdenId(int ordenEgresoId); */
+
         [OperationContract]
-        Task<List<DetalleOrdenEgreso>> GetDetallesOrdenEgresoByOrdenId(int ordenEgresoId);
+        Task<IEnumerable<DetalleOrdenEgreso>> GetAllDetallesOrdenEgresoAsync();
 
         [OperationContract]
         Task<DetalleOrdenEgreso> GetDetalleOrdenEgresoById(int detalleOrdenEgresoId);

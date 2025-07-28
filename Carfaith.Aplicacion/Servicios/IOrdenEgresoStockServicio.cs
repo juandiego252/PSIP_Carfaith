@@ -13,5 +13,14 @@ namespace Carfaith.Aplicacion.Servicios
     {
         [OperationContract]
         Task<int> CrearOrdenEgresoConDetalles(OrdenEgresoConDetallesDTO ordenEgresoConDetallesDTO);
+
+        [OperationContract]
+        Task<int> EditarOrdenEgresoConDetalles(OrdenEgresoConDetallesDTO OrdenEgresoConDetallesDTO);
+
+        [OperationContract]
+        Task<IEnumerable<OrdenEgresoConDetallesDTO>> GetOrdenEgresoConDetalles();
+
+        [OperationContract]
+        Task EliminarOrdenEgresoConDetalles(int idOrdenEgreso);
     }
 }

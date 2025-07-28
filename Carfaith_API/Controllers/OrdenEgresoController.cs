@@ -16,17 +16,17 @@ namespace Carfaith_API.Controllers
             _ordenEgresoStockServicio = ordenEgresoStockServicio;
         }
 
-        [HttpPost("CrearOrdenEgreso")]
+        [HttpPost("CrearOrdenEgresoConDetalles")]
         public async Task<IActionResult> CrearOrdenEgresoDetalles([FromBody] OrdenEgresoConDetallesDTO ordenEgresoConDetallesDTO)
         {
             try
             {
-                var OrdenEgresoId = await _ordenEgresoStockServicio.CrearOrdenEgresoConDetalles(ordenEgresoConDetallesDTO);
+                var OrdenEgreso = await _ordenEgresoStockServicio.CrearOrdenEgresoConDetalles(ordenEgresoConDetallesDTO);
 
                 return Ok(new
                 {
                     message = "Orden de egreso creada exitosamente.",
-                    ordenEgresoId = OrdenEgresoId
+                    ordenEgreso = OrdenEgreso
                 });
             }
             catch (Exception ex)
@@ -36,6 +36,52 @@ namespace Carfaith_API.Controllers
                     message = "Error al crear la orden de egreso.",
                     error = ex.Message
                 });
+            }
+        }
+
+        [HttpPut("EditarOrdenEgresoConDetalles")]
+        public async Task<IActionResult> EditarOrdenEgresoConDetalles([FromBody] OrdenEgresoConDetallesDTO OrdenEgresoConDetallesDTO)
+        {
+            try
+            {
+                await _ordenEgresoStockServicio.EditarOrdenEgresoConDetalles(OrdenEgresoConDetallesDTO);
+                return Ok(new { message = "Orden de egreso editada exitosamente." });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error interno" + ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Error interno del servidor." });
+            }
+        }
+
+
+        [HttpGet("ListarOrdenesIngresoConDetalles")]
+        public async Task<IActionResult> ListarOrdenesIngresoConDetalles()
+        {
+            try
+            {
+                var ordenes = await _ordenEgresoStockServicio.GetOrdenEgresoConDetalles();
+                return Ok(ordenes);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error interno" + ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Error interno del servidor." });
+            }
+        }
+
+        [HttpDelete("EliminarOrdenEgresoConDetalles/{id}")]
+        public async Task<IActionResult> EliminarOrdenEgresoConDetalles(int id)
+        {
+            try
+            {
+                await _ordenEgresoStockServicio.EliminarOrdenEgresoConDetalles(id);
+                return Ok(new { message = "Orden de egreso eliminada exitosamente." });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error interno" + ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Error interno del servidor." });
             }
         }
     }

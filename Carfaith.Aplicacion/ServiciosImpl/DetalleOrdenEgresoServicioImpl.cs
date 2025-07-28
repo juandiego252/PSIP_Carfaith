@@ -25,24 +25,29 @@ namespace Carfaith.Aplicacion.ServiciosImpl
             await _detalleOrdenEgresoRepositorio.AddAsync(detalleOrdenEgreso);
         }
 
-        public Task DeleteDetalleOrdenEgreso(int detalleOrdenEgresoId)
+        public async Task DeleteDetalleOrdenEgreso(int detalleOrdenEgresoId)
         {
-            throw new NotImplementedException();
+            await _detalleOrdenEgresoRepositorio.DeleteAsync(detalleOrdenEgresoId);
         }
 
-        public Task<DetalleOrdenEgreso> GetDetalleOrdenEgresoById(int detalleOrdenEgresoId)
+        public async Task<IEnumerable<DetalleOrdenEgreso>> GetAllDetallesOrdenEgresoAsync()
         {
-            throw new NotImplementedException();
+            return await _detalleOrdenEgresoRepositorio.GetAllAsync();
         }
 
-        public Task<List<DetalleOrdenEgreso>> GetDetallesOrdenEgresoByOrdenId(int ordenEgresoId)
+        public async Task<DetalleOrdenEgreso> GetDetalleOrdenEgresoById(int detalleOrdenEgresoId)
         {
-            throw new NotImplementedException();
+            return await _detalleOrdenEgresoRepositorio.GetByIdAsync(detalleOrdenEgresoId);
         }
 
-        public Task UpdateDetalleOrdenEgreso(DetalleOrdenEgreso detalleOrdenEgreso)
+        /* public async Task<List<DetalleOrdenEgreso>> GetDetallesOrdenEgresoByOrdenId(int ordenEgresoId)
         {
-            throw new NotImplementedException();
+            return await _detalleOrdenEgresoRepositorio.GetByIdAsync(ordenEgresoId);
+        } */
+
+        public async Task UpdateDetalleOrdenEgreso(DetalleOrdenEgreso detalleOrdenEgreso)
+        {
+            await _detalleOrdenEgresoRepositorio.UpdateAsync(detalleOrdenEgreso);
         }
     }
 }
