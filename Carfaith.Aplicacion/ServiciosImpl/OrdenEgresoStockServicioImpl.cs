@@ -69,7 +69,6 @@ namespace Carfaith.Aplicacion.ServiciosImpl
                     var ordenEgreso = new OrdenEgreso
                     {
                         Fecha = ordenEgresoConDetallesDTO.Fecha ?? DateOnly.FromDateTime(DateTime.Now),
-                        TipoEgreso = ordenEgresoConDetallesDTO.TipoEgreso,
                         Destino = ordenEgresoConDetallesDTO.Destino,
                         Estado = ordenEgresoConDetallesDTO.Estado
                     };
@@ -85,6 +84,7 @@ namespace Carfaith.Aplicacion.ServiciosImpl
                             OrdenEgresoId = ordenEgreso.IdOrdenEgreso,
                             IdProductoProveedor = detalleDTO.IdProductoProveedor,
                             Cantidad = detalleDTO.Cantidad,
+                            TipoEgreso = detalleDTO.TipoEgreso,
                             UbicacionId = detalleDTO.UbicacionId
                         };
 
@@ -130,7 +130,6 @@ namespace Carfaith.Aplicacion.ServiciosImpl
                 try
                 {
                     ordenEgresoExistente.Fecha = ordenEgresoConDetallesDTO.Fecha;
-                    ordenEgresoExistente.TipoEgreso = ordenEgresoConDetallesDTO.TipoEgreso;
                     ordenEgresoExistente.Destino = ordenEgresoConDetallesDTO.Destino;
                     ordenEgresoExistente.Estado = ordenEgresoConDetallesDTO.Estado;
 
@@ -163,6 +162,7 @@ namespace Carfaith.Aplicacion.ServiciosImpl
                             OrdenEgresoId = ordenEgresoExistente.IdOrdenEgreso,
                             IdProductoProveedor = detalleDTO.IdProductoProveedor,
                             Cantidad = detalleDTO.Cantidad,
+                            TipoEgreso = detalleDTO.TipoEgreso,
                             UbicacionId = detalleDTO.UbicacionId
                         };
 
@@ -249,13 +249,13 @@ namespace Carfaith.Aplicacion.ServiciosImpl
                 {
                     IdOrdenEgreso = ordenEgreso.IdOrdenEgreso,
                     Fecha = ordenEgreso.Fecha,
-                    TipoEgreso = ordenEgreso.TipoEgreso,
                     Destino = ordenEgreso.Destino,
                     Estado = ordenEgreso.Estado,
                     Detalles = detalles.Select(d => new OrdenEgresoDetallesDTO
                     {
                         IdProductoProveedor = d.IdProductoProveedor,
                         Cantidad = d.Cantidad,
+                        TipoEgreso = d.TipoEgreso,
                         UbicacionId = d.UbicacionId,
                     }).ToList()
                 };

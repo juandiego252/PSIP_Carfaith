@@ -12,6 +12,8 @@ namespace Carfaith.Aplicacion.DTO.DTOs.DetalleOrdenEgreso
 
         public int? Cantidad { get; set; }
 
+        public string? TipoEgreso { get; set; }
+
         public int? UbicacionId { get; set; }
     }
 }

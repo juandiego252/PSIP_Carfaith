@@ -15,7 +15,7 @@ public partial class Producto
 
     public int? LineaDeProducto { get; set; }
 
-    public bool? GestionaLote { get; set; }
+    public bool? Estado { get; set; }
 
     [JsonIgnore]
     public virtual LineasDeProducto? LineaDeProductoNavigation { get; set; }

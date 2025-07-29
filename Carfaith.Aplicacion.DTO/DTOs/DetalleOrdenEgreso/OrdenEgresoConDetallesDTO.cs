@@ -9,7 +9,6 @@ namespace Carfaith.Aplicacion.DTO.DTOs.DetalleOrdenEgreso
     public class OrdenEgresoConDetallesDTO
     {
         public int? IdOrdenEgreso { get; set; }
-        public string? TipoEgreso { get; set; }
         public DateOnly? Fecha { get; set; }
         public string? Destino { get; set; }
         public string? Estado { get; set; }

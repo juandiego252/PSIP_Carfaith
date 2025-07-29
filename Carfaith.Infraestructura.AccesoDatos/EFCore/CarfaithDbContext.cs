@@ -48,9 +48,9 @@ public partial class CarfaithDbContext : DbContext
 
     public virtual DbSet<Usuarios> Usuarios { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-       => optionsBuilder.UseSqlServer("Data Source=DESKTOP-C05PO3B\\SQLEXPRESS;Initial Catalog=carfaith;Integrated Security=True;TrustServerCertificate=True;");
+    /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+ #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-C05PO3B\\SQLEXPRESS;Initial Catalog=carfaith;Integrated Security=True;TrustServerCertificate=True;"); */
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -271,6 +271,9 @@ public partial class CarfaithDbContext : DbContext
             entity.Property(e => e.Nombre)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            entity.Property(e => e.Estado)
+                .HasColumnName("Estado");
 
             entity.HasOne(d => d.LineaDeProductoNavigation).WithMany(p => p.Productos)
                 .HasForeignKey(d => d.LineaDeProducto)
