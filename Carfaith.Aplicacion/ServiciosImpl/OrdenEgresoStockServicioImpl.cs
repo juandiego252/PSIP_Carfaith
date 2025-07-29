@@ -122,7 +122,7 @@ namespace Carfaith.Aplicacion.ServiciosImpl
             var ordenEgresoExistente = await _ordenEgresoServicio.GetOrdenEgresoByIdAsync(ordenEgresoConDetallesDTO.IdOrdenEgreso.Value);
             if (ordenEgresoExistente == null)
             {
-                throw new KeyNotFoundException($"No se encontró una orden de ingreso con el ID {ordenEgresoConDetallesDTO.IdOrdenEgreso}");
+                throw new KeyNotFoundException($"No se encontró una orden de egreso con el ID {ordenEgresoConDetallesDTO.IdOrdenEgreso}");
             }
 
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
@@ -223,7 +223,7 @@ namespace Carfaith.Aplicacion.ServiciosImpl
                         await _detalleOrdenEgresoServicio.DeleteDetalleOrdenEgreso(detalle.IdDetalleOrdenEgreso);
                     }
 
-                    // 5. Eliminar la orden de ingreso
+                    // 5. Eliminar la orden de egreso
                     await _ordenEgresoServicio.DeleteOrdenEgresoAsync(idOrdenEgreso);
 
                     scope.Complete();
@@ -231,17 +231,17 @@ namespace Carfaith.Aplicacion.ServiciosImpl
                 catch (Exception ex)
                 {
                     // Si ocurre un error, la transacción se revierte automáticamente
-                    throw new Exception($"Error al eliminar la orden de ingreso: {ex.Message}", ex);
+                    throw new Exception($"Error al eliminar la orden de egreso: {ex.Message}", ex);
                 }
             }
         }
 
         public async Task<IEnumerable<OrdenEgresoConDetallesDTO>> GetOrdenEgresoConDetalles()
         {
-            var ordenesIngreso = await _ordenEgresoServicio.GetAllOrdenEgresosAsync();
+            var ordenesEgreso = await _ordenEgresoServicio.GetAllOrdenEgresosAsync();
             var result = new List<OrdenEgresoConDetallesDTO>();
 
-            foreach (var ordenEgreso in ordenesIngreso)
+            foreach (var ordenEgreso in ordenesEgreso)
             {
                 var detalles = await _context.DetalleOrdenEgresos.Where(d => d.OrdenEgresoId == ordenEgreso.IdOrdenEgreso).ToListAsync();
 

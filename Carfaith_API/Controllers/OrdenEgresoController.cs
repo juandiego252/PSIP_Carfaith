@@ -55,8 +55,8 @@ namespace Carfaith_API.Controllers
         }
 
 
-        [HttpGet("ListarOrdenesIngresoConDetalles")]
-        public async Task<IActionResult> ListarOrdenesIngresoConDetalles()
+        [HttpGet("ListarOrdenesEgresoConDetalles")]
+        public async Task<IActionResult> ListarOrdenesEgresoConDetalles()
         {
             try
             {

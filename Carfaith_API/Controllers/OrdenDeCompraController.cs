@@ -1,4 +1,6 @@
-﻿using Carfaith.Aplicacion.Servicios;
+﻿using Carfaith.Aplicacion.DTO.DTOs.DetalleOrdenCompra;
+using Carfaith.Aplicacion.DTO.DTOs.DetalleOrdenEgreso;
+using Carfaith.Aplicacion.Servicios;
 using Carfaith.Dominio.Modelo.Entidades;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,25 +10,33 @@ namespace Carfaith_API.Controllers
     [Route("api/[Controller]")]
     public class OrdenDeCompraController : Controller
     {
-        private readonly IOrdenDeCompraServicio _ordenDeCompraServicio;
+        private readonly IOrdenCompraConDetalleServicio _ordenCompraConDetalle;
 
-        public OrdenDeCompraController(IOrdenDeCompraServicio ordenDeCompraServicio)
+        public OrdenDeCompraController(IOrdenCompraConDetalleServicio ordenCompraConDetalle)
         {
-            _ordenDeCompraServicio = ordenDeCompraServicio;
+            _ordenCompraConDetalle = ordenCompraConDetalle;
         }
 
-        [HttpPost("crearOrdenDeCompra")]
-        public async Task<IActionResult> CrearOrdenDeCompra([FromBody] OrdenDeCompra ordenDeCompra)
+        [HttpPost("CrearOrdenCompra")]
+        public async Task<IActionResult> CrearOrdenDeCompra([FromBody] OrdenCompraConDetallesDTO ordenDeCompra)
         {
             try
             {
-                await _ordenDeCompraServicio.AddOrdenDeCompraAsync(ordenDeCompra);
-                return Ok(ordenDeCompra);
+                var OrdenCompra = await _ordenCompraConDetalle.CrearOrdenCompraConDetalles(ordenDeCompra);
+
+                return Ok(new
+                {
+                    message = "Orden de compra creada exitosamente.",
+                    ordenCompra = OrdenCompra
+                });
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Se produjo un error: " + ex.ToString());
-                return StatusCode(500, "Error interno");
+                return BadRequest(new
+                {
+                    message = "Error al crear la orden de compra.",
+                    error = ex.Message
+                });
             }
         }
 
@@ -35,7 +45,7 @@ namespace Carfaith_API.Controllers
         {
             try
             {
-                var ordenesCompra = await _ordenDeCompraServicio.GetAllOrdenDeCompraAsync();
+                var ordenesCompra = await _ordenCompraConDetalle.GetOrdenCompraConDetalles();
                 return Ok(ordenesCompra);
             }
             catch (Exception ex)
@@ -45,34 +55,17 @@ namespace Carfaith_API.Controllers
             }
         }
 
-        [HttpGet("ObtenerOrdenCompraPorId/{id}")]
-        public async Task<IActionResult> ObtenerOrdenePorId(int id)
-        {
-            try
-            {
-                var ordenDeCompra = await _ordenDeCompraServicio.GetByIdOrdenDeCompraAsync(id);
-                if (ordenDeCompra == null)
-                {
-                    return NotFound($"Orden de compra con ID {id} no encontrada.");
-                }
-
-                return Ok(ordenDeCompra);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Se produjo un error: " + ex.ToString());
-                return StatusCode(500, "Error interno");
-
-            }
-        }
-
         [HttpPut("EditarOrdenCompra")]
-        public async Task<IActionResult> EditarOrdenCompra([FromBody] OrdenDeCompra ordenDeCompra)
+        public async Task<IActionResult> EditarOrdenCompra([FromBody] OrdenCompraConDetallesDTO ordenDeCompra)
         {
             try
             {
-                await _ordenDeCompraServicio.UpdateOrdenDeCompraAsync(ordenDeCompra);
-                return Ok(ordenDeCompra);
+                await _ordenCompraConDetalle.EditarOrdenCompraConDetalles(ordenDeCompra);
+                return Ok(new
+                {
+                    message = "Orden de compra editada exitosamente.",
+                    ordenCompra = ordenDeCompra
+                });
             }
             catch (Exception ex)
             {
@@ -86,14 +79,14 @@ namespace Carfaith_API.Controllers
         {
             try
             {
-                await _ordenDeCompraServicio.DeleteOrdenDeCompraByIdAsync(id);
-                return Ok($"Orden de compra con ID {id} eliminada correctamente.");
+                await _ordenCompraConDetalle.EliminarOrdenCompraConDetalles(id);
 
+                return Ok($"Orden de compra con ID {id} eliminada correctamente.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Se produjo un error: " + ex.ToString());
-                return StatusCode(500, "Error interno");
+                Console.WriteLine($"Error interno" + ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Error interno del servidor." });
             }
         }
     }
