@@ -1,5 +1,4 @@
 ﻿using Carfaith.Aplicacion.DTO.DTOs.DetalleOrdenEgreso;
-using Carfaith.Aplicacion.DTO.DTOs.DetalleOrdenEgreso;
 using Carfaith.Aplicacion.Servicios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -56,8 +55,8 @@ namespace Carfaith_API.Controllers
         }
 
 
-        [HttpGet("ListarOrdenesIngresoConDetalles")]
-        public async Task<IActionResult> ListarOrdenesIngresoConDetalles()
+        [HttpGet("ListarOrdenesEgresoConDetalles")]
+        public async Task<IActionResult> ListarOrdenesEgresoConDetalles()
         {
             try
             {
@@ -84,7 +83,6 @@ namespace Carfaith_API.Controllers
                 Console.WriteLine($"Error interno" + ex.ToString());
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Error interno del servidor." });
             }
-
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Carfaith.Aplicacion.DTO.DTOs.DetalleOrdenEgreso;
-using Carfaith.Aplicacion.DTO.DTOs.DetalleOrdenIngreso;
 using Carfaith.Aplicacion.Servicios;
 using Carfaith.Dominio.Modelo.Entidades;
 using Carfaith.Infraestructura.AccesoDatos.EFCore;
@@ -11,10 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
-using Carfaith.Aplicacion.DTO.DTOs.DetalleOrdenEgreso;
-using Carfaith.Aplicacion.Servicios;
-using Carfaith.Dominio.Modelo.Entidades;
-using Carfaith.Infraestructura.AccesoDatos.EFCore;
 
 namespace Carfaith.Aplicacion.ServiciosImpl
 {
@@ -74,6 +69,7 @@ namespace Carfaith.Aplicacion.ServiciosImpl
                     var ordenEgreso = new OrdenEgreso
                     {
                         Fecha = ordenEgresoConDetallesDTO.Fecha ?? DateOnly.FromDateTime(DateTime.Now),
+                        TipoEgreso = ordenEgresoConDetallesDTO.TipoEgreso,
                         Destino = ordenEgresoConDetallesDTO.Destino,
                         Estado = ordenEgresoConDetallesDTO.Estado
                     };
@@ -89,7 +85,6 @@ namespace Carfaith.Aplicacion.ServiciosImpl
                             OrdenEgresoId = ordenEgreso.IdOrdenEgreso,
                             IdProductoProveedor = detalleDTO.IdProductoProveedor,
                             Cantidad = detalleDTO.Cantidad,
-                            TipoEgreso = detalleDTO.TipoEgreso,
                             UbicacionId = detalleDTO.UbicacionId
                         };
 
@@ -127,7 +122,7 @@ namespace Carfaith.Aplicacion.ServiciosImpl
             var ordenEgresoExistente = await _ordenEgresoServicio.GetOrdenEgresoByIdAsync(ordenEgresoConDetallesDTO.IdOrdenEgreso.Value);
             if (ordenEgresoExistente == null)
             {
-                throw new KeyNotFoundException($"No se encontró una orden de ingreso con el ID {ordenEgresoConDetallesDTO.IdOrdenEgreso}");
+                throw new KeyNotFoundException($"No se encontró una orden de egreso con el ID {ordenEgresoConDetallesDTO.IdOrdenEgreso}");
             }
 
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
@@ -135,6 +130,7 @@ namespace Carfaith.Aplicacion.ServiciosImpl
                 try
                 {
                     ordenEgresoExistente.Fecha = ordenEgresoConDetallesDTO.Fecha;
+                    ordenEgresoExistente.TipoEgreso = ordenEgresoConDetallesDTO.TipoEgreso;
                     ordenEgresoExistente.Destino = ordenEgresoConDetallesDTO.Destino;
                     ordenEgresoExistente.Estado = ordenEgresoConDetallesDTO.Estado;
 
@@ -167,7 +163,6 @@ namespace Carfaith.Aplicacion.ServiciosImpl
                             OrdenEgresoId = ordenEgresoExistente.IdOrdenEgreso,
                             IdProductoProveedor = detalleDTO.IdProductoProveedor,
                             Cantidad = detalleDTO.Cantidad,
-                            TipoEgreso = detalleDTO.TipoEgreso,
                             UbicacionId = detalleDTO.UbicacionId
                         };
 
@@ -228,7 +223,7 @@ namespace Carfaith.Aplicacion.ServiciosImpl
                         await _detalleOrdenEgresoServicio.DeleteDetalleOrdenEgreso(detalle.IdDetalleOrdenEgreso);
                     }
 
-                    // 5. Eliminar la orden de ingreso
+                    // 5. Eliminar la orden de egreso
                     await _ordenEgresoServicio.DeleteOrdenEgresoAsync(idOrdenEgreso);
 
                     scope.Complete();
@@ -236,30 +231,31 @@ namespace Carfaith.Aplicacion.ServiciosImpl
                 catch (Exception ex)
                 {
                     // Si ocurre un error, la transacción se revierte automáticamente
-                    throw new Exception($"Error al eliminar la orden de ingreso: {ex.Message}", ex);
+                    throw new Exception($"Error al eliminar la orden de egreso: {ex.Message}", ex);
                 }
             }
         }
 
         public async Task<IEnumerable<OrdenEgresoConDetallesDTO>> GetOrdenEgresoConDetalles()
         {
-            var ordenesIngreso = await _ordenEgresoServicio.GetAllOrdenEgresosAsync();
+            var ordenesEgreso = await _ordenEgresoServicio.GetAllOrdenEgresosAsync();
             var result = new List<OrdenEgresoConDetallesDTO>();
 
-            foreach (var ordenIngreso in ordenesIngreso)
+            foreach (var ordenEgreso in ordenesEgreso)
             {
-                var detalles = await _context.DetalleOrdenEgresos.Where(d => d.OrdenEgresoId == ordenIngreso.IdOrdenEgreso).ToListAsync();
+                var detalles = await _context.DetalleOrdenEgresos.Where(d => d.OrdenEgresoId == ordenEgreso.IdOrdenEgreso).ToListAsync();
 
                 var ordenEgresoDTO = new OrdenEgresoConDetallesDTO
                 {
-                    Fecha = ordenIngreso.Fecha,
-                    Destino = ordenIngreso.Destino,
-                    Estado = ordenIngreso.Estado,
+                    IdOrdenEgreso = ordenEgreso.IdOrdenEgreso,
+                    Fecha = ordenEgreso.Fecha,
+                    TipoEgreso = ordenEgreso.TipoEgreso,
+                    Destino = ordenEgreso.Destino,
+                    Estado = ordenEgreso.Estado,
                     Detalles = detalles.Select(d => new OrdenEgresoDetallesDTO
                     {
                         IdProductoProveedor = d.IdProductoProveedor,
                         Cantidad = d.Cantidad,
-                        TipoEgreso = d.TipoEgreso,
                         UbicacionId = d.UbicacionId,
                     }).ToList()
                 };
