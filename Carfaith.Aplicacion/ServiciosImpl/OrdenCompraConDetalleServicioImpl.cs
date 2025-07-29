@@ -197,11 +197,15 @@ namespace Carfaith.Aplicacion.ServiciosImpl
             {
                 var detalles = await _context.DetalleOrdenCompras.Where(d => d.IdOrden == ordenCompra.idOrden).ToListAsync();
 
+                var proveedor = await _context.Proveedores
+                    .FirstOrDefaultAsync(p => p.IdProveedor == ordenCompra.idProveedor);
+
                 var ordenEgresoDTO = new OrdenCompraConDetallesDTO
                 {
                     IdOrden = ordenCompra.idOrden,
                     NumeroOrden = ordenCompra.numeroOrden,
                     IdProveedor = ordenCompra.idProveedor,
+                    NombreProveedor = proveedor?.NombreProveedor,
                     ArchivoPdf = ordenCompra.archivoPdf,
                     Estado = ordenCompra.estado,
                     FechaCreacion = ordenCompra.fechaCreacion,
