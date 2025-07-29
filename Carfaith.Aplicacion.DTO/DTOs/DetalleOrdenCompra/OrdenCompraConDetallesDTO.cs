@@ -14,6 +14,8 @@ namespace Carfaith.Aplicacion.DTO.DTOs.DetalleOrdenCompra
 
         public int? IdProveedor { get; set; }
 
+        public string? NombreProveedor { get; set; }
+
         public string? ArchivoPdf { get; set; }
 
         public string? Estado { get; set; }
